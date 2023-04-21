@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
+import { agentIconFunction } from "../functions/agentIconFunction";
+import { rankIconFunction } from "../functions/rankIconFunction";
 
 interface TeamScores {
   blue: number;
@@ -16,35 +18,45 @@ function didTeamWin(team: string, teamScores: TeamScores) {
 
 const LastMatches = () => {
   const [matchResults, setMatchResults] = useState<any[]>([]);
-  const { playerCompetitive, getCompetitiveMatchData } =
+  const { playerCompetitive, setPlayerCompetitive, getCompetitiveMatchData } =
     useContext(PlayerContext);
 
   useEffect(() => {
-    const matchResults = playerCompetitive?.map((match: any) => {
+    if (playerCompetitive) {
+      addRankToMatch();
+    }
+  }, []);
+
+  const addRankToMatch = async () => {
+    const updatedPlayerCompetitive = await Promise.all(
+      playerCompetitive.map(async (match: any) => {
+        const response = await getCompetitiveMatchData(match.meta.id);
+        return {
+          ...match,
+          rank: response,
+        };
+      })
+    );
+    setPlayerCompetitive(updatedPlayerCompetitive);
+
+    const matchResults = updatedPlayerCompetitive.map((match: any) => {
       const blueScore = match.teams.blue;
       const redScore = match.teams.red;
+      const playerRank = match.rank;
       const teamScores = { blue: blueScore, red: redScore };
 
-      return { matchData: match, teamScores };
+      return { matchData: match, teamScores, rank: playerRank };
     });
 
     setMatchResults(matchResults);
-  }, []);
+  };
 
-  // useEffect(() => {
-  //   if (playerCompetitive) {
-  //     playerCompetitive.map((match: any) => {
-  //       getCompetitiveMatchData(match.meta.id);
-  //     });
-  //   }
-  // }, []);
-
-  //! CODE POUR RECUPERER LES DONNEE SUR LE RANK DU JOUEUR ACTUEL SUR CHAQUE PARTIE
+  console.log("SEE HERE", matchResults);
 
   return (
     <div className="flex flex-col gap-2 ml-2 gradient w-full h-full">
       <h2 className="text-2xl tracking-wide uppercase font-bold mb-3">
-        Last Matches
+        Last Competitive Matches
       </h2>
 
       <div className="flex flex-col gap-4">
@@ -57,7 +69,11 @@ const LastMatches = () => {
             }`}
             key={match.matchData.meta.id}
           >
-            <span>{match.matchData.stats.character.name}</span>
+            <img
+              alt="icon d'agent"
+              className="w-12 rounded-full border border-gray"
+              src={agentIconFunction(match.matchData.stats.character.name)}
+            />
 
             <div className="flex flex-col gap-1 uppercase font-bold">
               <span>{match.matchData.meta.map.name}</span>
@@ -86,6 +102,8 @@ const LastMatches = () => {
                 </span>
               </div>
             </div>
+
+            <img src={rankIconFunction(match.rank)} alt="icon rank" />
           </div>
         ))}
       </div>

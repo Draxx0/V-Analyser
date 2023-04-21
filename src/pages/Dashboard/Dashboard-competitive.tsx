@@ -21,13 +21,13 @@ const DashboardCompetitive = () => {
         <PlayerWidget />
       </div>
 
-      <div className="grid grid-cols-6 mt-10 relative">
+      <div className="grid grid-cols-6 mt-10">
         {playerCompetitive ? (
           <div className="col-start-5 col-end-7 flex">
             <LastMatches />
           </div>
         ) : (
-          <div className="absolute left-2/4 top-2/4 flex flex-col gap-3 translate-y-[-100%] translate-x-[-50%]">
+          <div className="absolute left-2/4 top-2/4 flex flex-col gap-3 translate-y-[-50%] translate-x-[-50%]">
             <img src={Loading} alt="" className="w-32" />
             <span className="text-2xl font-semibold tracking-wide mt-6">
               Loading...

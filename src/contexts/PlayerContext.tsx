@@ -65,17 +65,17 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
     }
   };
 
-  const getCompetitiveMatchData = async (matchId: string): Promise<void> => {
+  const getCompetitiveMatchData = async (matchId: string): Promise<string> => {
     try {
       const response = await ApiService.getCompetitiveMatch(matchId);
       const playerMatch = response.data.players.all_players.find(
         (playerInMatch: any) => playerInMatch.name === player?.name
       );
-      console.log("Player :", playerMatch);
       const currentRankAtMatch = playerMatch.currenttier_patched;
-      console.log("Rank :", currentRankAtMatch);
+      return currentRankAtMatch;
     } catch (error) {
       console.log(error);
+      return "";
     }
   };
 
