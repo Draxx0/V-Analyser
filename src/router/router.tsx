@@ -4,6 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import DashboardCompetitive from "../pages/Dashboard/Dashboard-competitive";
 import NotFoundRouteProtect from "./NotFoundRouteProtect";
 import DashboardUnrated from "../pages/Dashboard/Dashboard-unrated";
+import News from "../pages/News";
 
 const Router = () => {
   return (
@@ -23,6 +24,15 @@ const Router = () => {
         element={
           <ProtectedRoute>
             <DashboardUnrated />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/news"
+        element={
+          <ProtectedRoute>
+            <News />
           </ProtectedRoute>
         }
       />

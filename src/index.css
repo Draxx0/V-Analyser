@@ -55,6 +55,22 @@ body {
   color: var(--white);
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--red);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a42b35;
+}
+
 #root {
   display: flex;
   gap: 1.5rem;

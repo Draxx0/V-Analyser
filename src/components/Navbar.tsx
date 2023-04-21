@@ -1,6 +1,6 @@
 import { BsFillGridFill } from "react-icons/bs";
-import { TbSwords } from "react-icons/tb";
-import { TbRobot } from "react-icons/tb";
+import { IoMapSharp } from "react-icons/io5";
+import { IoNewspaperSharp } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import Logo from "../assets/images/valorant.png";
 import { NavLink } from "react-router-dom";
@@ -21,13 +21,13 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink to={"/match"}>
-            <TbSwords />
+            <IoMapSharp />
           </NavLink>
         </li>
 
         <li>
-          <NavLink to={"/agents"}>
-            <TbRobot />
+          <NavLink to={"/news"}>
+            <IoNewspaperSharp />
           </NavLink>
         </li>
       </ul>
