@@ -8,6 +8,7 @@ import {
   useEffect,
 } from "react";
 import { PlayerData } from "../types/player.type";
+import { PlayerMmrData } from "../types/playerMmr.type";
 import ApiService from "../services/api.service";
 
 type IProps = {
@@ -19,9 +20,12 @@ type PlayerType = {
   setPlayer: Dispatch<SetStateAction<PlayerData | null>>;
   playerCompetitive: any; //! TYPAGE A CHANGER
   setPlayerCompetitive: Dispatch<SetStateAction<any>>; //! TYPAGE A CHANGER
+  playerMmr: PlayerMmrData | null;
+  setPlayerMmr: Dispatch<SetStateAction<PlayerMmrData | null>>;
   Signout: () => void;
   getCompetitiveData: () => void;
   getCompetitiveMatchData: (matchId: string) => void;
+  getMmrData: () => void;
 };
 
 const PlayerContext = createContext<PlayerType>({
@@ -29,20 +33,26 @@ const PlayerContext = createContext<PlayerType>({
   setPlayer: () => {},
   playerCompetitive: null,
   setPlayerCompetitive: () => {},
+  playerMmr: null,
+  setPlayerMmr: () => {},
   Signout: () => {},
   getCompetitiveData: () => {},
   getCompetitiveMatchData: () => {},
+  getMmrData: () => {},
 });
 
 const PlayerContextProvider: FC<IProps> = ({ children }) => {
   const [player, setPlayer] = useState<PlayerData | null>(null);
   const [playerCompetitive, setPlayerCompetitive] = useState<any>(null);
+  const [playerMmr, setPlayerMmr] = useState<PlayerMmrData | null>(null);
 
   const Signout = (): void => {
     setPlayer(null);
     setPlayerCompetitive(null);
+    setPlayerMmr(null);
     localStorage.removeItem("player");
     localStorage.removeItem("playerCompetitive");
+    localStorage.removeItem("playerMmr");
     window.location.href = "/";
   };
 
@@ -79,19 +89,43 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
     }
   };
 
+  const getMmrData = async (): Promise<void> => {
+    if (player) {
+      try {
+        const response = await ApiService.getPlayerMmr(
+          player.region,
+          player.puuid
+        );
+        localStorage.setItem("playerMmr", JSON.stringify(response.data));
+        setPlayerMmr(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("player")) {
       const playerInfo: PlayerData | null = localStorage.getItem(
         "player"
       ) as PlayerData | null;
       setPlayer(JSON.parse(playerInfo as unknown as string));
-    } else if (localStorage.getItem("playerCompetitive")) {
+    }
+
+    if (localStorage.getItem("playerCompetitive")) {
       const playerCompetitiveInfo: any = localStorage.getItem(
         "playerCompetitive"
       ) as any;
       setPlayerCompetitive(
         JSON.parse(playerCompetitiveInfo as unknown as string)
       );
+    }
+
+    if (localStorage.getItem("playerMmr")) {
+      const playerMmrInfo: PlayerMmrData | null = localStorage.getItem(
+        "playerMmr"
+      ) as PlayerMmrData | null;
+      setPlayerMmr(JSON.parse(playerMmrInfo as unknown as string));
     }
   }, []);
 
@@ -102,8 +136,11 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
         setPlayer,
         playerCompetitive,
         setPlayerCompetitive,
+        playerMmr,
+        setPlayerMmr,
         getCompetitiveData,
         getCompetitiveMatchData,
+        getMmrData,
         Signout,
       }}
     >

@@ -2,19 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { agentIconFunction } from "../functions/agentIconFunction";
 import { rankIconFunction } from "../functions/rankIconFunction";
-
-interface TeamScores {
-  blue: number;
-  red: number;
-}
-
-function didTeamWin(team: string, teamScores: TeamScores) {
-  if (team === "Blue") {
-    return teamScores.blue >= 13;
-  } else {
-    return teamScores.red >= 13;
-  }
-}
+import { didTeamWin } from "../functions/didTeamWin";
 
 const LastMatches = () => {
   const [matchResults, setMatchResults] = useState<any[]>([]);
@@ -51,11 +39,9 @@ const LastMatches = () => {
     setMatchResults(matchResults);
   };
 
-  console.log("SEE HERE", matchResults);
-
   return (
     <div className="flex flex-col gap-2 ml-2 gradient w-full h-full">
-      <h2 className="text-2xl tracking-wide uppercase font-bold mb-3">
+      <h2 className="text-xl tracking-wide uppercase font-bold mb-3">
         Last Competitive Matches
       </h2>
 
@@ -103,7 +89,11 @@ const LastMatches = () => {
               </div>
             </div>
 
-            <img src={rankIconFunction(match.rank)} alt="icon rank" />
+            <img
+              src={rankIconFunction(match.rank)}
+              alt="icon rank"
+              className="w-12 flex m-auto"
+            />
           </div>
         ))}
       </div>
