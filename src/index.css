@@ -71,6 +71,44 @@ body {
   background: #a42b35;
 }
 
+.image-wrapper {
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+}
+
+.article:hover img {
+  transform: scale(1.1);
+  transition: 0.6s ease-out transform;
+}
+
+.article svg {
+  width: 18px;
+}
+
+.play-button {
+  z-index: 10;
+}
+
+.play-button:hover > svg {
+  transform: translateX(3px);
+  transition: 0.3s ease-in-out transform;
+}
+
+.article:not(:hover) img {
+  transform: scale(1);
+  transition: 0.6s ease-out transform;
+}
+
+.article:hover .overlay {
+  background-color: var(--red);
+  transition: 0.6s ease-out background-color;
+}
+
+.article:not(:hover) .overlay {
+  background-color: transparent;
+  transition: 0.6s ease-out background-color;
+}
+
 #root {
   display: flex;
   gap: 1.5rem;

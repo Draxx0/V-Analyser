@@ -58,7 +58,7 @@ const Pagination: React.FC<Props> = ({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex justify-center gap-10 pb-7">
+    <div className="flex justify-center gap-10 py-7">
       {currentPage > 1 && (
         <button
           onClick={() => onPageChange(currentPage - 1)}

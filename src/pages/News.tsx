@@ -4,7 +4,7 @@ import Pagination from "../components/Pagination";
 import NewsList from "../components/NewsList";
 import PlayerWidget from "../components/PlayerWidget";
 import NewsFilter from "../components/NewsFilter";
-import { useTransition, animated } from "react-spring";
+import { useTransition, animated, easings } from "react-spring";
 
 const News = () => {
   const [news, setNews] = useState<NewsData[]>([]);
@@ -49,9 +49,15 @@ const News = () => {
   }, []);
 
   const transitions = useTransition(currentArticles, {
-    from: { opacity: 0, transform: "translate3d(0, -40px, 0)" },
-    enter: { opacity: 1, transform: "translate3d(0, 0px, 0)" },
-    leave: { opacity: 0, transform: "translate3d(0, 40px, 0)" },
+    config: {
+      mass: 1,
+      tension: 170,
+      friction: 26,
+      easeInOutBack: easings.easeInOutBack,
+    },
+    from: { opacity: 0, transform: "translate3D(20px,0,0)" },
+    enter: { opacity: 1, transform: "translate3D(0px,0,0)" },
+    leave: { opacity: 0, transform: "translate3D(-20px,0,0)" },
   });
 
   return (
