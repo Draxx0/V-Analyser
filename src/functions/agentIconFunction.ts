@@ -1,5 +1,4 @@
 export const agentIconFunction = (agent: string) => {
-  //swicth case that return link to the agent icon
   switch (agent) {
     case "Jett":
       return "/src/assets/images/agents/jett.webp";

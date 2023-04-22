@@ -19,11 +19,13 @@ const NewsFilter = ({ categories, selectedCategory, onSelect }: Props) => {
   return (
     <div className="relative mb-8">
       <div
-        className="w-[25%] border-2 border-red rounded-md shadow-md py-2 px-3 cursor-pointer flex items-center justify-between"
+        className="w-[25%] border-2 border-red rounded-md shadow-md py-2 px-3 cursor-pointer flex items-center justify-between z-3"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex gap-3">
-          <span className="text-gray-600 font-medium">Filter by category:</span>
+        <div className="flex gap-1">
+          <span className="text-gray-600 font-medium">
+            Filter by category :
+          </span>
           <span className="text-gray-800 font-medium capitalize">
             {selectedCategory || "All"}
           </span>

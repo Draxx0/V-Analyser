@@ -23,11 +23,13 @@ body {
 .win {
   background: linear-gradient(109.47deg, #181b29 7.96%, #1d383f 97.69%);
   border-right: 5px solid #24b299;
+  transition: 0.3s ease-in-out all;
 }
 
 .lose {
   background: linear-gradient(109.47deg, #181b29 7.96%, #3f2a35 97.69%);
   border-right: 5px solid #eb5e5e;
+  transition: 0.3s ease-in-out all;
 }
 
 .ml-1-12 {
@@ -40,6 +42,20 @@ input {
 
 .gradient {
   background: linear-gradient(109.47deg, #181b29 7.96%, #0c0d2d 97.69%);
+  border: 2px solid #2e3348;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.gradient-purple {
+  background: linear-gradient(146.4deg, #181b29 0%, #2e193a 100%);
+  border: 2px solid #2e3348;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.gradient-yellow {
+  background: linear-gradient(146.4deg, #181b29 0%, #3b3417 100%);
   border: 2px solid #2e3348;
   border-radius: 20px;
   padding: 30px;
@@ -86,7 +102,7 @@ body {
 }
 
 .play-button {
-  z-index: 10;
+  z-index: 2;
 }
 
 .play-button:hover > svg {

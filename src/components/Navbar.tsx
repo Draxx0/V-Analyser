@@ -20,7 +20,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={"/match"}>
+          <NavLink to={"/maps"}>
             <IoMapSharp />
           </NavLink>
         </li>

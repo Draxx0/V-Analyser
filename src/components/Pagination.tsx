@@ -1,9 +1,11 @@
 import React from "react";
+import { NewsData } from "../types/news.type";
 
 interface Props {
   totalArticles: number;
   articlesPerPage: number;
   currentPage: number;
+  articles: NewsData[];
   onPageChange: (pageNumber: number) => void;
 }
 
@@ -11,6 +13,7 @@ const Pagination: React.FC<Props> = ({
   totalArticles,
   articlesPerPage,
   currentPage,
+  articles,
   onPageChange,
 }) => {
   const getPageNumbers = () => {
@@ -58,45 +61,49 @@ const Pagination: React.FC<Props> = ({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex justify-center gap-10 py-7">
-      {currentPage > 1 && (
-        <button
-          onClick={() => onPageChange(currentPage - 1)}
-          className="text-lg hover:text-red transition-all"
-        >
-          Précédent
-        </button>
-      )}
+    <>
+      {articles.length > 0 && (
+        <div className="flex justify-center gap-10 py-7">
+          {currentPage > 1 && (
+            <button
+              onClick={() => onPageChange(currentPage - 1)}
+              className="text-lg hover:text-red transition-all"
+            >
+              Précédent
+            </button>
+          )}
 
-      <div className="flex gap-2">
-        {pageNumbers.map((pageNumber, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              if (typeof pageNumber === "number") {
-                onPageChange(pageNumber);
-              }
-            }}
-            className={
-              currentPage === pageNumber
-                ? "font-bold text-red text-lg"
-                : "text-lg"
-            }
-          >
-            {pageNumber}
-          </button>
-        ))}
-      </div>
+          <div className="flex gap-2">
+            {pageNumbers.map((pageNumber, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (typeof pageNumber === "number") {
+                    onPageChange(pageNumber);
+                  }
+                }}
+                className={
+                  currentPage === pageNumber
+                    ? "font-bold text-red text-lg"
+                    : "text-lg"
+                }
+              >
+                {pageNumber}
+              </button>
+            ))}
+          </div>
 
-      {currentPage < Math.ceil(totalArticles / articlesPerPage) && (
-        <button
-          onClick={() => onPageChange(currentPage + 1)}
-          className="text-lg hover:text-red transition-all"
-        >
-          Suivant
-        </button>
+          {currentPage < Math.ceil(totalArticles / articlesPerPage) && (
+            <button
+              onClick={() => onPageChange(currentPage + 1)}
+              className="text-lg hover:text-red transition-all"
+            >
+              Suivant
+            </button>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

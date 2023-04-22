@@ -81,7 +81,7 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
       const playerMatch = response.data.players.all_players.find(
         (playerInMatch: any) => playerInMatch.name === player?.name
       );
-      const currentRankAtMatch = playerMatch.currenttier_patched;
+      const currentRankAtMatch = playerMatch?.currenttier_patched;
       return currentRankAtMatch;
     } catch (error) {
       console.log(error);

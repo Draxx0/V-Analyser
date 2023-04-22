@@ -5,7 +5,7 @@ import { rankIconFunction } from "../functions/rankIconFunction";
 const Rating = () => {
   const { playerMmr } = useContext(PlayerContext);
   return (
-    <div className="flex flex-col gap-5 gradient w-[75%] h-full items-center m-auto">
+    <div className="flex flex-col gap-5 gradient-yellow h-full items-center ">
       <h2 className="text-xl tracking-wide uppercase font-bold mb-3">Rating</h2>
       <img
         src={rankIconFunction(playerMmr?.currenttierpatched as string)}

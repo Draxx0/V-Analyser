@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashboardNav from "../../components/DashboardNav";
 import PlayerWidget from "../../components/PlayerWidget";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import LastMatches from "../../components/LastMatches";
-import Loading from "../../assets/images/loading.gif";
 import Rating from "../../components/Rating";
+import LastMatch from "../../components/LastMatch";
+import { IPlayerMatchCompetitiveData } from "../../types/player-competitive.type";
+import Loading from "../../components/Loading";
 
 const DashboardCompetitive = () => {
   const {
@@ -15,11 +17,20 @@ const DashboardCompetitive = () => {
     playerMmr,
   } = useContext(PlayerContext);
 
+  const [lastMatch, setLastMatch] = useState<IPlayerMatchCompetitiveData>(
+    {} as IPlayerMatchCompetitiveData
+  );
+
   useEffect(() => {
     getCompetitiveData();
     getMmrData();
-    console.log("watch out loop");
   }, [player]);
+
+  useEffect(() => {
+    if (playerCompetitive) {
+      setLastMatch(playerCompetitive[0]);
+    }
+  }, [playerCompetitive]);
 
   return (
     <section className="mt-10">
@@ -28,25 +39,21 @@ const DashboardCompetitive = () => {
         <PlayerWidget />
       </div>
 
-      <div className="grid grid-cols-6 grid-rows-4 mt-10">
+      <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5">
         {playerCompetitive && playerMmr ? (
           <>
-            <div className="col-start-5 col-end-7 row-start-1 row-end-4 block h-fit">
-              <LastMatches />
+            <div className="col-start-1 col-end-5 row-start-1 row-end-1 block h-full">
+              <LastMatch lastMatch={lastMatch} />
             </div>
-            <div className="row-start-2 row-end-2 col-start-3 col-end-5 block h-[300px]">
+            <div className="col-start-5 col-end-7 row-start-1 row-end-1 block h-full">
+              <LastMatches setLastMatch={setLastMatch} />
+            </div>
+            <div className="row-start-2 row-end-2 col-start-5 col-end-7 block h-[300px]">
               <Rating />
             </div>
-            <div className="row-start-1 row-end-1 col-start-3 col-end-5 block h-fit"></div>
-            <div className="row-start-1 row-end-1 col-start-3 col-end-5 block h-fit"></div>
           </>
         ) : (
-          <div className="absolute left-2/4 top-2/4 flex flex-col gap-3 translate-y-[-50%] translate-x-[-50%]">
-            <img src={Loading} alt="" className="w-32" />
-            <span className="text-2xl font-semibold tracking-wide mt-6">
-              Loading...
-            </span>
-          </div>
+          <Loading />
         )}
       </div>
     </section>

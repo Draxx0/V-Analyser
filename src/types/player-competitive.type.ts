@@ -13,7 +13,7 @@ type IPlayerMatchCompetitiveResult = {
   after: number;
 };
 
-type IPlayerMatchCompetitiveData = {
+export type IPlayerMatchCompetitiveData = {
   meta: {
     id: string;
     map: {

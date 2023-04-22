@@ -4,7 +4,6 @@ import Pagination from "../components/Pagination";
 import NewsList from "../components/NewsList";
 import PlayerWidget from "../components/PlayerWidget";
 import NewsFilter from "../components/NewsFilter";
-import { useTransition, animated, easings } from "react-spring";
 
 const News = () => {
   const [news, setNews] = useState<NewsData[]>([]);
@@ -48,18 +47,6 @@ const News = () => {
     getNews();
   }, []);
 
-  const transitions = useTransition(currentArticles, {
-    config: {
-      mass: 1,
-      tension: 170,
-      friction: 26,
-      easeInOutBack: easings.easeInOutBack,
-    },
-    from: { opacity: 0, transform: "translate3D(20px,0,0)" },
-    enter: { opacity: 1, transform: "translate3D(0px,0,0)" },
-    leave: { opacity: 0, transform: "translate3D(-20px,0,0)" },
-  });
-
   return (
     <section className="mt-10">
       <div className="flex justify-between items-center mb-8">
@@ -81,11 +68,7 @@ const News = () => {
       />
 
       <div className="grid grid-cols-4 gap-10 mb-5">
-        {transitions((style, article) => (
-          <animated.div style={style} key={article.url}>
-            <NewsList articles={[article]} />
-          </animated.div>
-        ))}
+        <NewsList articles={currentArticles} />
       </div>
 
       <Pagination
@@ -93,6 +76,7 @@ const News = () => {
         articlesPerPage={articlesPerPage}
         currentPage={currentPage}
         onPageChange={handlePageChange}
+        articles={currentArticles}
       />
     </section>
   );
