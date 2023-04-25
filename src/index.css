@@ -20,6 +20,20 @@ body {
   overflow-x: hidden;
 }
 
+main:has(.auth) {
+  margin: 0;
+}
+
+input::placeholder {
+  transition: 0.3s ease-in-out all;
+  transform: scale(1);
+  transform-origin: left;
+}
+
+input:focus::placeholder {
+  transform: scale(0);
+}
+
 .win {
   background: linear-gradient(109.47deg, #181b29 7.96%, #1d383f 97.69%);
   border-right: 5px solid #24b299;
@@ -205,4 +219,21 @@ li:has(.active) {
 
 .active.dashboard-link::after {
   opacity: 1;
+}
+
+.loader {
+  animation: spin 1s linear infinite;
+}
+
+.wrapper-loader {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

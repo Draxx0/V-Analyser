@@ -1,106 +1,106 @@
-export const rankIconFunction = (rank: string) => {
-  switch (rank) {
-    case "Unranked":
-      return "/assets/images/ranks/unranked.png";
+export const rankIconByCurrentTier = (currentTier: number): string => {
+  switch (currentTier) {
+    case 1:
+      return "/assets/images/ranks/unranked.webp";
       break;
 
-    case "Iron 1":
+    case 3:
       return "/assets/images/ranks/iron1.webp";
       break;
 
-    case "Iron 2":
+    case 4:
       return "/assets/images/ranks/iron2.webp";
       break;
 
-    case "Iron 3":
+    case 5:
       return "/assets/images/ranks/iron3.webp";
       break;
 
-    case "Bronze 1":
+    case 6:
       return "/assets/images/ranks/bronze1.webp";
       break;
 
-    case "Bronze 2":
+    case 7:
       return "/assets/images/ranks/bronze2.webp";
       break;
 
-    case "Bronze 3":
-      return "/assets/images/ranks/bronze3.webp";
+    case 8:
+      return "/assets/images/ranks/beonze3.webp";
       break;
 
-    case "Silver 1":
+    case 9:
       return "/assets/images/ranks/silver1.webp";
       break;
 
-    case "Silver 2":
+    case 10:
       return "/assets/images/ranks/silver2.webp";
       break;
 
-    case "Silver 3":
+    case 11:
       return "/assets/images/ranks/silver3.webp";
       break;
 
-    case "Gold 1":
+    case 12:
       return "/assets/images/ranks/gold1.webp";
       break;
 
-    case "Gold 2":
+    case 13:
       return "/assets/images/ranks/gold2.webp";
       break;
 
-    case "Gold 3":
+    case 14:
       return "/assets/images/ranks/gold3.webp";
       break;
 
-    case "Platinum 1":
+    case 15:
       return "/assets/images/ranks/platinum1.webp";
       break;
 
-    case "Platinum 2":
+    case 16:
       return "/assets/images/ranks/platinum2.webp";
       break;
 
-    case "Platinum 3":
+    case 17:
       return "/assets/images/ranks/platinum3.webp";
       break;
 
-    case "Diamond 1":
+    case 18:
       return "/assets/images/ranks/diamond1.webp";
       break;
 
-    case "Diamond 2":
+    case 19:
       return "/assets/images/ranks/diamond2.webp";
       break;
 
-    case "Diamond 3":
+    case 20:
       return "/assets/images/ranks/diamond3.webp";
       break;
 
-    case "Ascendant 1":
+    case 21:
       return "/assets/images/ranks/ascendant1.webp";
       break;
 
-    case "Ascendant 2":
+    case 22:
       return "/assets/images/ranks/ascendant2.webp";
       break;
 
-    case "Ascendant 3":
+    case 23:
       return "/assets/images/ranks/ascendant3.webp";
       break;
 
-    case "Immortal 1":
+    case 24:
       return "/assets/images/ranks/immortal1.webp";
       break;
 
-    case "Immortal 2":
+    case 25:
       return "/assets/images/ranks/immortal2.webp";
       break;
 
-    case "Immortal 3":
+    case 26:
       return "/assets/images/ranks/immortal3.webp";
       break;
 
-    case "Radiant":
+    case 27:
       return "/assets/images/ranks/radiant.webp";
       break;
 

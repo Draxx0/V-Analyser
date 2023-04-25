@@ -3,7 +3,7 @@ export interface IPlayerMatchCompetitiveResponse {
   name: string;
   tag: string;
   results: IPlayerMatchCompetitiveResult;
-  data: IPlayerMatchCompetitiveData[];
+  data: IPlayerMatchData[];
 }
 
 type IPlayerMatchCompetitiveResult = {
@@ -13,7 +13,7 @@ type IPlayerMatchCompetitiveResult = {
   after: number;
 };
 
-export type IPlayerMatchCompetitiveData = {
+export type IPlayerMatchData = {
   meta: {
     id: string;
     map: {
@@ -54,6 +54,19 @@ export type IPlayerMatchCompetitiveData = {
     };
   };
   teams: {
+    red: number;
+    blue: number;
+  };
+  matchData: IPlayerMatchData;
+  rank?: string;
+};
+
+export type IPlayerMatchDataWithRank = IPlayerMatchData & {
+  rank: string;
+};
+
+export type IPlayerMatchDataWithRankAndTeamScore = IPlayerMatchDataWithRank & {
+  teamScores: {
     red: number;
     blue: number;
   };

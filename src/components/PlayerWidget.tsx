@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Badge from "../../public/assets/images/valorant-badge.png";
+import Badge from "/assets/images/valorant-badge.png";
 import { PlayerContext } from "../contexts/PlayerContext";
 
 const PlayerWidget = () => {

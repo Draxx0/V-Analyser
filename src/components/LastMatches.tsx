@@ -3,29 +3,48 @@ import { PlayerContext } from "../contexts/PlayerContext";
 import { agentIconFunction } from "../functions/agentIconFunction";
 import { rankIconFunction } from "../functions/rankIconFunction";
 import { didTeamWin } from "../functions/didTeamWin";
-import { IPlayerMatchCompetitiveData } from "../types/player-competitive.type";
+import {
+  IPlayerMatchData,
+  IPlayerMatchDataWithRank,
+  IPlayerMatchDataWithRankAndTeamScore,
+} from "../types/player-competitive.type";
 import Loading from "./Loading";
+import { useLocation } from "react-router-dom";
+import useGetUnrateds from "../hooks/UseGetUnrateds";
 
 const LastMatches = ({
   setLastMatch,
 }: {
-  setLastMatch: React.Dispatch<
-    React.SetStateAction<IPlayerMatchCompetitiveData>
-  >;
+  setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatchData>>;
 }) => {
-  const [matchResults, setMatchResults] = useState<any[]>([]);
+  const [matchResults, setMatchResults] = useState<
+    IPlayerMatchDataWithRankAndTeamScore[]
+  >([]);
+  const location = useLocation();
+  const { getUnrateds } = useGetUnrateds();
   const { playerCompetitive, setPlayerCompetitive, getCompetitiveMatchData } =
     useContext(PlayerContext);
 
-  useEffect(() => {
-    if (playerCompetitive) {
-      addRankToMatch();
+  const SwicthCaseMatch = async () => {
+    switch (location.pathname) {
+      case "/dashboard/competitive":
+        addRankToMatch();
+        break;
+
+      case "/dashboard/unrated":
+        const matchResults = await getUnrateds();
+        setMatchResults(matchResults as any);
+        break;
     }
+  };
+
+  useEffect(() => {
+    SwicthCaseMatch();
   }, []);
 
   const addRankToMatch = async () => {
     const updatedPlayerCompetitive = await Promise.all(
-      playerCompetitive.map(async (match: any) => {
+      playerCompetitive.map(async (match: IPlayerMatchData) => {
         const response = await getCompetitiveMatchData(match.meta.id);
         return {
           ...match,
@@ -35,25 +54,27 @@ const LastMatches = ({
     );
     setPlayerCompetitive(updatedPlayerCompetitive);
 
-    const matchResults = updatedPlayerCompetitive.map((match: any) => {
-      const blueScore = match.teams.blue;
-      const redScore = match.teams.red;
-      const playerRank = match.rank;
-      const teamScores = { blue: blueScore, red: redScore };
+    const matchResults = updatedPlayerCompetitive.map(
+      (match: IPlayerMatchDataWithRank) => {
+        const blueScore = match.teams.blue;
+        const redScore = match.teams.red;
+        const playerRank = match.rank;
+        const teamScores = { blue: blueScore, red: redScore };
 
-      return { matchData: match, teamScores, rank: playerRank };
-    });
+        return { matchData: match, teamScores, rank: playerRank };
+      }
+    );
 
-    setMatchResults(matchResults);
+    setMatchResults(matchResults as any); //! a revoir
   };
 
   return (
-    <div className="flex flex-col gap-2 ml-2 gradient w-full h-full relative">
+    <div className="flex flex-col gap-2 gradient w-full h-full relative">
       <h2 className="text-xl tracking-wide uppercase font-bold mb-3">
         Last Matches
       </h2>
 
-      {matchResults.length > 0 ? (
+      {matchResults && matchResults.length > 0 ? (
         <div className="flex flex-col gap-4">
           {matchResults.map((match: any) => (
             <div
@@ -101,11 +122,13 @@ const LastMatches = ({
                 </div>
               </div>
 
-              <img
-                src={rankIconFunction(match.rank)}
-                alt="icon rank"
-                className="w-12 flex m-auto"
-              />
+              {match.rank && (
+                <img
+                  src={rankIconFunction(match.rank)}
+                  alt="icon rank"
+                  className="w-12 flex m-auto"
+                />
+              )}
             </div>
           ))}
         </div>

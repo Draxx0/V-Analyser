@@ -3,7 +3,7 @@ import Auth from "../pages/Auth";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardCompetitive from "../pages/Dashboard/Dashboard-competitive";
 import NotFoundRouteProtect from "./NotFoundRouteProtect";
-import DashboardUnrated from "../pages/Dashboard/Dashboard-unrated";
+import DashboardNotCompetitive from "../pages/Dashboard/Dashboard-not-competitive";
 import News from "../pages/News";
 
 const Router = () => {
@@ -23,7 +23,7 @@ const Router = () => {
         path="/dashboard/unrated"
         element={
           <ProtectedRoute>
-            <DashboardUnrated />
+            <DashboardNotCompetitive />
           </ProtectedRoute>
         }
       />

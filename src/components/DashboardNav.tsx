@@ -16,27 +16,6 @@ const DashboardNav = () => {
       >
         unrated
       </NavLink>
-
-      <NavLink
-        to={"/dashboard/deathmatch"}
-        className="uppercase text-gray font-bold hover:dashboard-link-hover dashboard-link"
-      >
-        deathmatch
-      </NavLink>
-
-      <NavLink
-        to={"/dashboard/spike-rush"}
-        className="uppercase text-gray font-bold hover:dashboard-link-hover dashboard-link"
-      >
-        spike rush
-      </NavLink>
-
-      <NavLink
-        to={"/dashboard/escalation"}
-        className="uppercase text-gray font-bold hover:dashboard-link-hover dashboard-link"
-      >
-        escalation
-      </NavLink>
     </nav>
   );
 };

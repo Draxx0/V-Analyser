@@ -5,20 +5,16 @@ import { PlayerContext } from "../../contexts/PlayerContext";
 import LastMatches from "../../components/LastMatches";
 import Rating from "../../components/Rating";
 import LastMatch from "../../components/LastMatch";
-import { IPlayerMatchCompetitiveData } from "../../types/player-competitive.type";
+import { IPlayerMatchData } from "../../types/player-competitive.type";
 import Loading from "../../components/Loading";
+import LastMatchesGrid from "../../components/LastMatchesGrid";
 
 const DashboardCompetitive = () => {
-  const {
-    getCompetitiveData,
-    getMmrData,
-    playerCompetitive,
-    player,
-    playerMmr,
-  } = useContext(PlayerContext);
+  const { getCompetitiveData, getMmrData, playerCompetitive, player } =
+    useContext(PlayerContext);
 
-  const [lastMatch, setLastMatch] = useState<IPlayerMatchCompetitiveData>(
-    {} as IPlayerMatchCompetitiveData
+  const [lastMatch, setLastMatch] = useState<IPlayerMatchData>(
+    {} as IPlayerMatchData
   );
 
   useEffect(() => {
@@ -39,23 +35,7 @@ const DashboardCompetitive = () => {
         <PlayerWidget />
       </div>
 
-      <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5">
-        {playerCompetitive && playerMmr ? (
-          <>
-            <div className="col-start-1 col-end-5 row-start-1 row-end-1 block h-full">
-              <LastMatch lastMatch={lastMatch} />
-            </div>
-            <div className="col-start-5 col-end-7 row-start-1 row-end-1 block h-full">
-              <LastMatches setLastMatch={setLastMatch} />
-            </div>
-            <div className="row-start-2 row-end-2 col-start-5 col-end-7 block h-[300px]">
-              <Rating />
-            </div>
-          </>
-        ) : (
-          <Loading />
-        )}
-      </div>
+      <LastMatchesGrid lastMatch={lastMatch} setLastMatch={setLastMatch} />
     </section>
   );
 };
