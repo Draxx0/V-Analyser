@@ -15,7 +15,7 @@ const LastMatch = ({ lastMatch }: IProps) => {
     lastMatch?.stats?.shots.leg;
   return (
     <>
-      <div className="flex justify-between gradient-purple w-full h-full">
+      <div className="flex justify-between gradient-purple w-full h-full relative">
         {lastMatch.stats ? (
           <>
             <div className="flex flex-col justify-evenly relative bottom-4 w-1/2 gap-10">

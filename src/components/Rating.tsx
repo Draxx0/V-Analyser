@@ -16,12 +16,12 @@ const Rating = () => {
               Rating
             </h2>
             <img
-              src={rankIconFunction(playerMmr?.currenttierpatched as string)}
+              src={rankIconFunction(playerMmr.current_data.currenttierpatched)}
               alt=""
               className="w-24"
             />
             <h4 className="text-l tracking-wide uppercase font-bold">
-              {playerMmr?.currenttierpatched}
+              {playerMmr.current_data.currenttierpatched}
             </h4>
           </div>
 
@@ -31,30 +31,32 @@ const Rating = () => {
             </h2>
 
             <h4 className="text-xl tracking-wide uppercase font-bold">
-              {playerMmr.ranking_in_tier}{" "}
-              {playerMmr.currenttier < 25 && "/ 100"}
+              {playerMmr.current_data.ranking_in_tier}{" "}
+              {playerMmr.current_data.currenttier < 25 && "/ 100"}
             </h4>
             <h4
               className={`text-l tracking-wide uppercase font-bold ${
-                playerMmr.mmr_change_to_last_game > 0
+                playerMmr.current_data.mmr_change_to_last_game > 0
                   ? "text-green"
                   : "text-red"
               }`}
             >
-              {playerMmr.mmr_change_to_last_game > 0
-                ? "+ " + playerMmr.mmr_change_to_last_game
-                : playerMmr.mmr_change_to_last_game}{" "}
+              {playerMmr.current_data.mmr_change_to_last_game > 0
+                ? "+ " + playerMmr.current_data.mmr_change_to_last_game
+                : playerMmr.current_data.mmr_change_to_last_game}{" "}
               Last game
             </h4>
 
-            {playerMmr.currenttierpatched !== "Unranked" &&
-            playerMmr.currenttierpatched !== "Radiant" ? (
+            {playerMmr.current_data.currenttierpatched !== "Unranked" &&
+            playerMmr.current_data.currenttierpatched !== "Radiant" ? (
               <div className="flex flex-col gap-2 items-center">
                 <h4 className="text-l tracking-wide uppercase font-bold">
                   Next Rank
                 </h4>
                 <img
-                  src={rankIconByCurrentTier(playerMmr.currenttier + 1)}
+                  src={rankIconByCurrentTier(
+                    playerMmr.current_data.currenttier + 1
+                  )}
                   alt="rankIcon"
                   className="h-12 w-12"
                 />

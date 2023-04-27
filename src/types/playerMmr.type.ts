@@ -4,15 +4,25 @@ export interface IPlayerMmrResponse {
 }
 
 export type PlayerMmrData = {
-  currenttier: number;
-  currenttierpatched: string;
-  images: PlayerMmrImages;
-  ranking_in_tier: number;
-  mmr_change_to_last_game: number;
-  elo: number;
   name: string;
   tag: string;
-  old: boolean;
+  puuid: string;
+  current_data: {
+    currenttier: number;
+    currenttierpatched: string;
+    images: PlayerMmrImages;
+    ranking_in_tier: number;
+    mmr_change_to_last_game: number;
+    elo: number;
+    games_needed_for_rating: number;
+    old: boolean;
+  };
+  highest_rank: {
+    old: boolean;
+    tier: number;
+    patched_tier: string;
+    season: string;
+  };
 };
 
 type PlayerMmrImages = {

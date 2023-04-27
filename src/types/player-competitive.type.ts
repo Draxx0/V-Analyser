@@ -1,12 +1,12 @@
-export interface IPlayerMatchCompetitiveResponse {
+export interface IPlayerMatchResponse {
   status: number;
   name: string;
   tag: string;
-  results: IPlayerMatchCompetitiveResult;
+  results: IPlayerMatchResult;
   data: IPlayerMatchData[];
 }
 
-type IPlayerMatchCompetitiveResult = {
+type IPlayerMatchResult = {
   total: number;
   returned: number;
   before: number;

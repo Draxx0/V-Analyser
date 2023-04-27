@@ -5,6 +5,7 @@ import DashboardCompetitive from "../pages/Dashboard/Dashboard-competitive";
 import NotFoundRouteProtect from "./NotFoundRouteProtect";
 import DashboardNotCompetitive from "../pages/Dashboard/Dashboard-not-competitive";
 import News from "../pages/News";
+import MapDashboard from "../pages/Map/MapDashboard";
 
 const Router = () => {
   return (
@@ -24,6 +25,15 @@ const Router = () => {
         element={
           <ProtectedRoute>
             <DashboardNotCompetitive />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/maps"
+        element={
+          <ProtectedRoute>
+            <MapDashboard />
           </ProtectedRoute>
         }
       />

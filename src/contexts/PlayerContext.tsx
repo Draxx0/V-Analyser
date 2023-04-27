@@ -94,10 +94,12 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
       try {
         const response = await ApiService.getPlayerMmr(
           player.region,
-          player.puuid
+          player.name,
+          player.tag
         );
-        localStorage.setItem("playerMmr", JSON.stringify(response.data));
-        setPlayerMmr(response.data);
+        console.log("response from context", response);
+        localStorage.setItem("playerMmr", JSON.stringify(response));
+        setPlayerMmr(response);
       } catch (error) {
         console.log(error);
       }

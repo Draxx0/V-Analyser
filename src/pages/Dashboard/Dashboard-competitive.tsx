@@ -2,12 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import DashboardNav from "../../components/DashboardNav";
 import PlayerWidget from "../../components/PlayerWidget";
 import { PlayerContext } from "../../contexts/PlayerContext";
-import LastMatches from "../../components/LastMatches";
-import Rating from "../../components/Rating";
-import LastMatch from "../../components/LastMatch";
 import { IPlayerMatchData } from "../../types/player-competitive.type";
-import Loading from "../../components/Loading";
-import LastMatchesGrid from "../../components/LastMatchesGrid";
+import MatchDashboardContent from "../../components/MatchDashboardContent";
 
 const DashboardCompetitive = () => {
   const { getCompetitiveData, getMmrData, playerCompetitive, player } =
@@ -35,7 +31,10 @@ const DashboardCompetitive = () => {
         <PlayerWidget />
       </div>
 
-      <LastMatchesGrid lastMatch={lastMatch} setLastMatch={setLastMatch} />
+      <MatchDashboardContent
+        lastMatch={lastMatch}
+        setLastMatch={setLastMatch}
+      />
     </section>
   );
 };

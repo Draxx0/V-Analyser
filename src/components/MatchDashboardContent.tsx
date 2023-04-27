@@ -6,13 +6,14 @@ import LastMatches from "./LastMatches";
 import Rating from "./Rating";
 import Loading from "./Loading";
 import { useLocation } from "react-router-dom";
+import HighestRating from "./HighestRating";
 
 interface Props {
   lastMatch: IPlayerMatchData;
   setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatchData>>;
 }
 
-const LastMatchesGrid = ({ lastMatch, setLastMatch }: Props) => {
+const MatchDashboardContent = ({ lastMatch, setLastMatch }: Props) => {
   const { playerCompetitive, playerMmr } = useContext(PlayerContext);
   const location = useLocation();
   return (
@@ -26,9 +27,15 @@ const LastMatchesGrid = ({ lastMatch, setLastMatch }: Props) => {
             <LastMatches setLastMatch={setLastMatch} />
           </div>
           {location.pathname === "/dashboard/competitive" && (
-            <div className="row-start-2 row-end-2 col-start-1 col-end-5 block h-[300px]">
-              <Rating />
-            </div>
+            <>
+              <div className="row-start-2 row-end-2 col-start-1 col-end-5 block h-[300px]">
+                <Rating />
+              </div>
+
+              <div className="row-start-2 row-end-2 col-start-5 col-end-7 block h-[300px]">
+                <HighestRating />
+              </div>
+            </>
           )}
         </>
       ) : (
@@ -38,4 +45,4 @@ const LastMatchesGrid = ({ lastMatch, setLastMatch }: Props) => {
   );
 };
 
-export default LastMatchesGrid;
+export default MatchDashboardContent;

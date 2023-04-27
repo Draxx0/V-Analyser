@@ -1,5 +1,5 @@
 import DashboardNav from "../../components/DashboardNav";
-import LastMatchesGrid from "../../components/LastMatchesGrid";
+import MatchDashboardContent from "../../components/MatchDashboardContent";
 import PlayerWidget from "../../components/PlayerWidget";
 import useGetUnrateds from "../../hooks/UseGetUnrateds";
 import { IPlayerMatchData } from "../../types/player-competitive.type";
@@ -11,6 +11,8 @@ const DashboardNotCompetitive = () => {
   );
 
   const { unrateds } = useGetUnrateds();
+
+  console.log(unrateds);
 
   useEffect(() => {
     if (unrateds) {
@@ -26,7 +28,10 @@ const DashboardNotCompetitive = () => {
         <PlayerWidget />
       </div>
 
-      <LastMatchesGrid lastMatch={lastMatch} setLastMatch={setLastMatch} />
+      <MatchDashboardContent
+        lastMatch={lastMatch}
+        setLastMatch={setLastMatch}
+      />
     </section>
   );
 };
