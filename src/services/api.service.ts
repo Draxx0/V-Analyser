@@ -3,6 +3,7 @@ import { IPlayerResponse } from "../types/player.type";
 import { IPlayerMatchResponse } from "../types/player-competitive.type";
 import { IMapResponse } from "../types/map.type";
 import { PlayerMmrData } from "../types/playerMmr.type";
+import { IMap } from "../types/map.type";
 
 interface ApiServiceMethods {
   [key: string]: (...args: any[]) => Promise<any>;
@@ -70,7 +71,11 @@ const getMap = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?map=${map}`
   );
-  return response.data;
+
+  const data = response.data.data.filter(
+    (map: IMap) => map.meta.mode !== "Custom Game"
+  );
+  return data;
 };
 
 const getPlayerMmr = async (region: string, name: string, tag: string) => {

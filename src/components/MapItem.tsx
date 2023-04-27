@@ -8,7 +8,7 @@ const MapItem = ({
   getMapData,
 }: {
   map: ILocalMap;
-  setMaps: React.Dispatch<React.SetStateAction<IMap[]>>;
+  setMapData: React.Dispatch<React.SetStateAction<IMap[]>>;
   getMapData: (mapName: string) => Promise<void>;
 }) => {
   return (

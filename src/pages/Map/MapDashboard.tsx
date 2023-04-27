@@ -9,20 +9,19 @@ import { useEffect, useState, useContext } from "react";
 const MapDashboard = () => {
   const { player } = useContext(PlayerContext);
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);
-  const [maps, setMaps] = useState<IMap[]>([]);
+  const [mapData, setMapData] = useState<IMap[]>([]);
   const [currentMap, setCurrentMap] = useState<IMap[]>([]);
 
-  const getMapData = async (mapName: string) => {
+  const getMapData = async (mapName: string): Promise<void> => {
     if (player) {
       try {
-        const response: IMapResponse = await ApiService.getMap(
+        const response: IMap[] = await ApiService.getMap(
           player.region,
           player.name,
           player.tag,
           mapName
         );
-        console.log(response.data);
-        setMaps(response.data);
+        setMapData(response);
       } catch (error) {
         console.log(error);
       }
@@ -35,10 +34,11 @@ const MapDashboard = () => {
   }, [player]);
 
   useEffect(() => {
-    if (maps.length > 0) {
-      setCurrentMap(maps);
+    if (mapData.length > 0) {
+      console.log("more than one maps !", mapData);
+      setCurrentMap(mapData);
     }
-  }, [maps]);
+  }, [mapData]);
 
   return (
     <section className="mt-10">
@@ -53,7 +53,7 @@ const MapDashboard = () => {
             {localMaps.map((map: ILocalMap) => (
               <MapItem
                 map={map}
-                setMaps={setMaps}
+                setMapData={setMapData}
                 key={map.id}
                 getMapData={getMapData}
               />
