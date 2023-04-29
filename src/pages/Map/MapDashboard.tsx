@@ -41,14 +41,14 @@ const MapDashboard = () => {
 
   return (
     <section className="mt-10">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold tracking-wide">Maps</h1>
+      <div className="flex justify-between items-center mb-8 sm:flex-col-reverse sm:gap-4 sm:items-start">
+        <h1 className="text-4xl font-bold tracking-wide">Maps</h1>
         <PlayerWidget />
       </div>
 
-      <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5">
+      <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5 xl:flex xl:flex-col">
         <div className="col-start-1 col-end-2 row-start-1 row-end-2 block h-full gradient no-p maps">
-          <div className="flex flex-col justify-center h-full">
+          <div className="flex flex-col justify-center h-full xl:flex-row w-full">
             {localMaps.map((map: ILocalMap) => (
               <MapItem
                 map={map}
@@ -61,10 +61,10 @@ const MapDashboard = () => {
         </div>
 
         <div className="col-start-2 col-end-7 row-start-1 gradient h-full w-full relative">
-          {currentMap.length > 0 ? (<MapDetails currentMap={currentMap} />) :(<h3 className="text-3xl font-bold tracking-wide text-red flex items-center justify-center">No data found</h3>)}
+          {currentMap.length > 0 ? (<MapDetails currentMap={currentMap} />) : (<h3 className="text-3xl font-bold tracking-wide text-red flex items-center justify-center">No data found</h3>)}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

@@ -13,7 +13,7 @@ const MapItem = ({
 }) => {
   return (
     <div
-      className="flex flex-col justify-center items-center relative"
+      className="flex flex-col justify-center items-center relative w-full"
       onClick={() => getMapData(map.name)}
     >
       <img

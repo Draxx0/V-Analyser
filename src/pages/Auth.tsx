@@ -35,15 +35,15 @@ const Auth = () => {
   }, []);
 
   return (
-    <section className="flex h-screen auth">
-      <div className="w-1/2 h-full bg-[url('/assets/images/valo-background.jpg')] bg-cover bg-center"></div>
-      <div className="w-1/2 flex flex-col p-10 justify-center relative">
-        <h1 className="text-5xl font-bold mb-5 text-red uppercase">
+    <section className="flex h-screen auth 2sm:flex-col">
+      <div className="w-1/2 h-full bg-[url('/assets/images/valo-background.jpg')] bg-cover bg-center lg:w-1/3 2sm:w-full 2sm:h-1/3"></div>
+      <div className="w-1/2 flex flex-col p-10 justify-center relative lg:w-2/3 2sm:w-full 2sm:h-2/3 2sm:justify-start">
+        <h1 className="text-5xl font-bold mb-5 text-red uppercase lg:text-4xl md:text-3xl">
           V-Analyser
         </h1>
         <form
           onSubmit={handleConnectData}
-          className="flex flex-col gap-5 w-2/3"
+          className="flex flex-col gap-5 w-2/3 lg:w-full"
         >
           <input
             type="text"
@@ -57,11 +57,11 @@ const Auth = () => {
               An error occured, please try again.
             </p>
           )}
-          <div className="relative w-fit h-fit">
+          <div className="relative w-fit h-fit md:w-full">
             <button
               type="submit"
               onClick={() => setIsLoading(true)}
-              className="bg-red text-white p-3 w-fit rounded cursor-pointer uppercase font-bold tracking-wide hover:filter hover:brightness-75 transition delay-0 duration-300 ease-in-out"
+              className="bg-red text-white p-3 w-fit rounded cursor-pointer md:p-2 md:w-full md:text-md uppercase font-bold tracking-wide hover:filter hover:brightness-75 transition delay-0 duration-300 ease-in-out"
             >
               Load my stats
             </button>
@@ -75,7 +75,7 @@ const Auth = () => {
         </form>
 
         <small className="text-lg absolute bottom-5">
-          Made by{" "}
+          Made with 🤍 by{" "}
           <span
             className="text-red underline cursor-pointer"
             onClick={() => window.open("https://github.com/Draxx0")}

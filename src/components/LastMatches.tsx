@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { agentIconFunction } from "../functions/agentIconFunction";
 import { rankIconFunction } from "../functions/rankIconFunction";
-import { didTeamWin } from "../functions/didTeamWin";
+import { TeamScores, didTeamWin } from "../functions/didTeamWin";
 import {
   IPlayerMatchData,
   IPlayerMatchDataWithRank,
@@ -54,22 +54,22 @@ const LastMatches = ({
     );
     setPlayerCompetitive(updatedPlayerCompetitive);
 
-    const matchResults = updatedPlayerCompetitive.map(
+    const matchResults: any = updatedPlayerCompetitive.map(
       (match: IPlayerMatchDataWithRank) => {
-        const blueScore = match.teams.blue;
-        const redScore = match.teams.red;
-        const playerRank = match.rank;
-        const teamScores = { blue: blueScore, red: redScore };
+        const blueScore: number = match.teams.blue;
+        const redScore: number = match.teams.red;
+        const playerRank: string = match.rank;
+        const teamScores: TeamScores = { blue: blueScore, red: redScore };
 
         return { matchData: match, teamScores, rank: playerRank };
       }
     );
 
-    setMatchResults(matchResults as any); //! a revoir
+    setMatchResults(matchResults); //! a revoir
   };
 
   return (
-    <div className="flex flex-col gap-2 gradient w-full h-full relative">
+    <div className="flex flex-col gap-2 gradient w-full h-full relative xl:max-h-[300px] xl:overflow-y-scroll">
       <h2 className="text-xl tracking-wide uppercase font-bold mb-3">
         Last Matches
       </h2>
@@ -78,11 +78,10 @@ const LastMatches = ({
         <div className="flex flex-col gap-4">
           {matchResults.map((match: any) => (
             <div
-              className={`grid grid-cols-4 items-center p-2 cursor-pointer hover:border-5 hover:border-white hover:scale-[1.02] ${
-                didTeamWin(match.matchData.stats.team, match.teamScores)
-                  ? "win"
-                  : "lose"
-              }`}
+              className={`grid grid-cols-4 items-center p-2 cursor-pointer hover:border-5 hover:border-white hover:scale-[1.02] ${didTeamWin(match.matchData.stats.team, match.teamScores)
+                ? "win"
+                : "lose"
+                }`}
               onClick={() => setLastMatch(match.matchData)}
               key={match.matchData.meta.id}
             >

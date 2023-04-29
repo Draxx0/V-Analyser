@@ -3,6 +3,7 @@ import { formatDate } from "../functions/formatDate";
 import { GiHeadshot, GiLegArmor, GiShoulderArmor } from "react-icons/gi";
 import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import Loading from "./Loading";
+import { agentIconFunction } from "../functions/agentIconFunction";
 
 type IProps = {
   lastMatch: IPlayerMatchData;
@@ -18,20 +19,23 @@ const LastMatch = ({ lastMatch }: IProps) => {
       <div className="flex justify-between gradient-purple w-full h-full relative">
         {lastMatch.stats ? (
           <>
-            <div className="flex flex-col justify-evenly relative bottom-4 w-1/2 gap-10">
+            <div className="flex flex-col justify-evenly relative bottom-4 w-1/2 gap-10 md:w-full md:p-6 2sm:p-2">
               <h2 className="text-xl tracking-wide uppercase font-bold">
                 Match Result -{" "}
                 <span className="text-red">{lastMatch.meta.map.name}</span> -{" "}
                 {formatDate(lastMatch.meta.started_at)}
               </h2>
 
-              <span className="text-5xl tracking-wide uppercase font-bold text-red">
-                {lastMatch.stats.character.name}
-              </span>
+              <div className="flex items-center gap-4">
+                <span className="text-5xl tracking-wide uppercase font-bold text-red">
+                  {lastMatch.stats.character.name}
+                </span>
+                <img src={agentIconFunction(lastMatch.stats.character.name)} alt="" className="hidden w-16 rounded-full border-2 border-red scale-x-[-1] md:block" />
+              </div>
 
               <span className="bg-gray w-full h-[2px]"></span>
 
-              <div className="grid grid-cols-3 grid-rows-2 gap-3">
+              <div className="grid grid-cols-3 grid-rows-2 gap-3 lg:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <span className="text-gray font-bold text-lg">K/D Ratio</span>
                   <span className="text-lg font-bold">
@@ -85,7 +89,7 @@ const LastMatch = ({ lastMatch }: IProps) => {
                 </div>
               </div>
             </div>
-            <div className="w-1/2 relative bottom-[50px]">
+            <div className="w-1/2 relative bottom-[50px] md:hidden">
               <img
                 src={agentSplashartFunction(lastMatch.stats.character.name)}
                 alt=""

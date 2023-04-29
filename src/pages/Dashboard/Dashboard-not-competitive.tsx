@@ -18,10 +18,10 @@ const DashboardNotCompetitive = () => {
     }
   }, [unrateds]);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <section className="mt-10">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center sm:flex-wrap-reverse sm:gap-10 ">
         <DashboardNav />
         <PlayerWidget />
       </div>

@@ -93,6 +93,14 @@ body {
   color: var(--white);
 }
 
+.gradient::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gradient::-webkit-scrollbar-thumb, .gradient::-webkit-scrollbar-track {
+  border-radius: 50px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

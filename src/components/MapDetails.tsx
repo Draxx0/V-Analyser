@@ -4,13 +4,14 @@ import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import { IMap } from "../types/map.type";
 import Loading from "./Loading";
 import { mapDataCalculator } from "../functions/mapDataCalculator";
+import { agentIconFunction } from "../functions/agentIconFunction";
 
 const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
   return (
     <>
       {currentMap.length > 0 ? (
         <div className="flex justify-between p-10 h-full">
-          <div className="flex flex-col justify-evenly">
+          <div className="flex flex-col justify-evenly xl:gap-10 lg:w-full">
             <h1 className="text-4xl font-bold tracking-wide text-red mb-10">
               {currentMap[0].meta.map.name}
             </h1>
@@ -24,16 +25,18 @@ const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
               </span>
             </h2>
 
-            <h2 className="text-2xl font-bold tracking-wide">
-              Top agent -{" "}
-              <span className="text-red text-2xl font-bold tracking-wide">
+            <h2 className="text-2xl font-bold tracking-wide lg:flex lg:items-center sm:flex-col sm:items-start sm:gap-3">
+              Top agent {" "}
+              <span className="text-red text-2xl font-bold tracking-wide lg:ml-2 sm:ml-0">
                 {mapDataCalculator(currentMap, "favoriteAgent")}
               </span>
+
+              <img src={agentIconFunction(mapDataCalculator(currentMap, "favoriteAgent"))} alt="agent icon" className="hidden ml-5 rounded-full border-2 border-red w-16 scale-x-[-1] lg:block" />
             </h2>
 
             <span className="bg-gray w-full h-[2px]"></span>
 
-            <div className="grid grid-cols-3 gap-10">
+            <div className="grid grid-cols-3 gap-10 xl:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <span className="text-gray font-bold text-lg">K/D Ratio</span>
                 <span className="text-lg font-bold">
@@ -82,13 +85,16 @@ const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
             </div>
           </div>
 
+
+
           <img
             src={agentSplashartFunction(
               mapDataCalculator(currentMap, "favoriteAgent")
             )}
             alt=""
-            className="h-[600px] w-[600px] object-contain"
+            className="h-[600px] w-[600px] object-contain xl:h-[700px] xl:w-[400px] lg:hidden"
           />
+
         </div>
       ) : (
         <Loading />

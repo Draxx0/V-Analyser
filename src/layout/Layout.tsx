@@ -10,9 +10,9 @@ const Layout: FC<IProps> = ({ children }) => {
   const { player } = useContext(PlayerContext);
   return (
     <>
-      {player !== null && <Navbar />}
+      {player && <Navbar />}
 
-      <main className="ml-1-12 w-full mr-7">
+      <main className="ml-1-12 w-full mr-7 md:mx-10 md:mt-20 md:m-auto">
         <>{children}</>
       </main>
     </>

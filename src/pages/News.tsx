@@ -50,7 +50,7 @@ const News = () => {
   return (
     <section className="mt-10">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold tracking-wide">News</h1>
+        <h1 className="text-4xl font-bold tracking-wide">News</h1>
         <PlayerWidget />
       </div>
       <NewsFilter
