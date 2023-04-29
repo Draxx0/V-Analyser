@@ -14,7 +14,7 @@ const Auth = () => {
   const handleConnectData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const trimmedUsername = formUsername.trim();
+      const trimmedUsername: string = formUsername.trim();
       const { username, tag } = separateUsernameAndTag(trimmedUsername);
       const account: any = await ApiService.getAccount(username, tag);
       localStorage.setItem("player", JSON.stringify(account.data));
@@ -23,7 +23,6 @@ const Auth = () => {
     } catch (error) {
       setError(true);
       setIsLoading(false);
-
       setTimeout(() => {
         setError(false);
       }, 3000);
@@ -40,7 +39,7 @@ const Auth = () => {
       <div className="w-1/2 h-full bg-[url('/assets/images/valo-background.jpg')] bg-cover bg-center"></div>
       <div className="w-1/2 flex flex-col p-10 justify-center relative">
         <h1 className="text-5xl font-bold mb-5 text-red uppercase">
-          Valorant Tracker
+          V-Analyser
         </h1>
         <form
           onSubmit={handleConnectData}
