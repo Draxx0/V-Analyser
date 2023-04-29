@@ -21,14 +21,14 @@ const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
             <h2 className="text-2xl font-bold tracking-wide">
               Winrate -{" "}
               <span className="text-red text-2xl font-bold tracking-wide">
-                83%
+                {mapDataCalculator(currentMap, "winrate")} %
               </span>
             </h2>
 
             <h2 className="text-2xl font-bold tracking-wide">
               Top agent -{" "}
               <span className="text-red text-2xl font-bold tracking-wide">
-                Sage
+                {mapDataCalculator(currentMap, "favoriteAgent")}
               </span>
             </h2>
 
@@ -53,7 +53,10 @@ const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
                 <span className="text-gray font-bold text-lg">
                   Favorite Mode
                 </span>
-                <span className="text-lg font-bold">Competitve</span>
+                <span className="text-lg font-bold">
+                  {" "}
+                  {mapDataCalculator(currentMap, "favoriteMode")}
+                </span>
               </div>
 
               <div className="flex flex-col gap-2">
@@ -81,7 +84,9 @@ const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
           </div>
 
           <img
-            src={agentSplashartFunction("Sage")}
+            src={agentSplashartFunction(
+              mapDataCalculator(currentMap, "favoriteAgent")
+            )}
             alt=""
             className="h-[600px] w-[600px] object-contain"
           />

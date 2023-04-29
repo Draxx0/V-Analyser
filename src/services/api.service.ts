@@ -73,7 +73,14 @@ const getMap = async (
   );
 
   const data = response.data.data.filter(
-    (map: IMap) => map.meta.mode !== "Custom Game"
+    (map: IMap) =>
+      map.meta.mode !== "Custom Game" &&
+      map.meta.mode !== "Spike Rush" &&
+      map.meta.mode !== "Deathmatch" &&
+      map.meta.mode !== "Snowball Fight" &&
+      map.meta.mode !== "Replication" &&
+      map.meta.mode !== "Escalation" &&
+      map.meta.mode !== "Swiftplay"
   );
   return data;
 };

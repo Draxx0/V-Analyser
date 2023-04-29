@@ -1,4 +1,4 @@
-interface TeamScores {
+export interface TeamScores {
   blue: number;
   red: number;
 }
