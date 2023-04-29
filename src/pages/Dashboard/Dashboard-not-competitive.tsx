@@ -12,8 +12,6 @@ const DashboardNotCompetitive = () => {
 
   const { unrateds } = useGetUnrateds();
 
-  console.log(unrateds);
-
   useEffect(() => {
     if (unrateds) {
       setLastMatch(unrateds[0].matchData);

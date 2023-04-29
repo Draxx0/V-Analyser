@@ -35,7 +35,6 @@ const MapDashboard = () => {
 
   useEffect(() => {
     if (mapData.length > 0) {
-      console.log("more than one maps !", mapData);
       setCurrentMap(mapData);
     }
   }, [mapData]);

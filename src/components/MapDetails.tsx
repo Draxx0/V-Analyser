@@ -6,7 +6,6 @@ import Loading from "./Loading";
 import { mapDataCalculator } from "../functions/mapDataCalculator";
 
 const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
-  console.log(currentMap);
   return (
     <>
       {currentMap.length > 0 ? (

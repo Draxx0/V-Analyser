@@ -6,7 +6,6 @@ import Loading from "./Loading";
 
 const Rating = () => {
   const { playerMmr } = useContext(PlayerContext);
-  console.log(playerMmr);
   return (
     <>
       {playerMmr ? (

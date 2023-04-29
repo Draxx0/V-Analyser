@@ -97,7 +97,6 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
           player.name,
           player.tag
         );
-        console.log("response from context", response);
         localStorage.setItem("playerMmr", JSON.stringify(response));
         setPlayerMmr(response);
       } catch (error) {
