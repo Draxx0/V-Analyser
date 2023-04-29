@@ -61,7 +61,7 @@ const MapDashboard = () => {
         </div>
 
         <div className="col-start-2 col-end-7 row-start-1 gradient h-full w-full relative">
-          <MapDetails currentMap={currentMap} />
+          {currentMap.length > 0 ? (<MapDetails currentMap={currentMap} />) :(<h3 className="text-3xl font-bold tracking-wide text-red flex items-center justify-center">No data found</h3>)}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { IPlayerMatchData } from "../types/player-competitive.type";
 import { formatDate } from "../functions/formatDate";
-import { GiHeadshot, GiLegArmor, GiTrenchBodyArmor } from "react-icons/gi";
+import { GiHeadshot, GiLegArmor, GiShoulderArmor } from "react-icons/gi";
 import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import Loading from "./Loading";
 
@@ -69,7 +69,7 @@ const LastMatch = ({ lastMatch }: IProps) => {
                 <div className="flex flex-col gap-2">
                   <span className="text-gray font-bold text-lg">Body %</span>
                   <span className="text-lg font-bold flex gap-2 items-center">
-                    <GiTrenchBodyArmor />{" "}
+                    <GiShoulderArmor />{" "}
                     {((lastMatch.stats.shots.body / shotsSum) * 100).toFixed(2)}{" "}
                     %
                   </span>
