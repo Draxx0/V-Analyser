@@ -11,6 +11,7 @@ node_modules
 *.local
 .env
 .FUTURE-FEATURES.md
+dist
 
 # Editor directories and files
 .vscode/*
