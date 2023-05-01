@@ -4,11 +4,12 @@ import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import { IMap } from "../types/map.type";
 import { mapDataCalculator } from "../functions/mapDataCalculator";
 import { agentIconFunction } from "../functions/agentIconFunction";
+import Loading from "./Loading";
 
-const MapDetails = ({ currentMap, isData }: { currentMap: IMap[], isData: boolean }) => {
+const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
   return (
     <>
-      {currentMap.length > 0 && (
+      {currentMap.length > 0 ? (
         <div className="flex justify-between p-10 h-full">
           <div className="flex flex-col justify-evenly xl:gap-10 lg:w-full">
             <h1 className="text-4xl font-bold tracking-wide text-red mb-10">
@@ -94,13 +95,9 @@ const MapDetails = ({ currentMap, isData }: { currentMap: IMap[], isData: boolea
             className="h-[600px] w-[600px] object-contain xl:h-[700px] xl:w-[400px] lg:hidden"
           />
         </div>
+      ) : (
+        <Loading />
       )}
-
-      {!isData &&
-        <div className="flex flex-col items-center justify-center w-full h-full gap-5">
-          <h1 className="text-5xl font-bold text-red">No data found</h1>
-          <img src="./assets/images/nodata.gif" alt="" className="w-64" />
-        </div>}
     </>
   );
 };

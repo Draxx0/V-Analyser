@@ -52,6 +52,7 @@ const getUnrated = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?mode=unrated`
   );
+
   const slicedData =
     response.data.data.length >= 6
       ? response.data.data.slice(0, 6)
@@ -71,8 +72,6 @@ const getMap = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?map=${map}`
   );
-
-
 
   const data = response.data.data.filter(
     (map: IMap) =>
