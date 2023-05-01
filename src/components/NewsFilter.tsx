@@ -32,9 +32,8 @@ const NewsFilter = ({ categories, selectedCategory, onSelect }: Props) => {
         </div>
         <span className="ml-1 text-gray-500">
           <svg
-            className={`h-4 w-4 transform transition-transform duration-300 ${
-              isOpen ? "rotate-[-90deg]" : ""
-            }`}
+            className={`h-4 w-4 transform transition-transform duration-300 ${isOpen ? "rotate-[-90deg]" : ""
+              }`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -50,18 +49,17 @@ const NewsFilter = ({ categories, selectedCategory, onSelect }: Props) => {
         (style, item) =>
           item && (
             <animated.div
-              className="w-full md:w-fit bg-red rounded-md shadow-md py-2 absolute z-10 top-14 left-0"
+              className="w-[25%] md:w-fit bg-red rounded-md shadow-md py-2 absolute z-10 top-14 left-0"
               style={style}
             >
               <ul>
                 {categories.map((category) => (
                   <li
                     key={category}
-                    className={`py-1 px-3 cursor-pointer capitalize ${
-                      selectedCategory === category
-                        ? "font-bold bg-gray-200"
-                        : ""
-                    }`}
+                    className={`py-1 px-3 cursor-pointer capitalize ${selectedCategory === category
+                      ? "font-bold bg-gray-200"
+                      : ""
+                      }`}
                     onClick={() => {
                       setIsOpen(false);
                       onSelect(category);
