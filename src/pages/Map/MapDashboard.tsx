@@ -6,6 +6,7 @@ import localMapsJson from "../../data/maps.json";
 import ApiService from "../../services/api.service";
 import { ILocalMap, IMap, IMapResponse } from "../../types/map.type";
 import { useEffect, useState, useContext } from "react";
+import Loading from "../../components/Loading";
 const MapDashboard = () => {
   const { player } = useContext(PlayerContext);
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);
@@ -61,7 +62,7 @@ const MapDashboard = () => {
         </div>
 
         <div className="col-start-2 col-end-7 row-start-1 gradient h-full w-full relative">
-          {currentMap.length > 0 ? (<MapDetails currentMap={currentMap} />) : (<h3 className="text-3xl font-bold tracking-wide text-red flex items-center justify-center">No data found</h3>)}
+          <MapDetails currentMap={currentMap} />
         </div>
       </div>
     </section >
