@@ -72,7 +72,7 @@ const getMap = async (
     }/lifetime/matches/${region}/${name}/${tag}?map=${map}`
   );
 
-  console.log(response.data.data)
+
 
   const data = response.data.data.filter(
     (map: IMap) =>
@@ -84,6 +84,8 @@ const getMap = async (
       map.meta.mode !== "Escalation" &&
       map.meta.mode !== "Swiftplay"
   );
+
+  console.log(data)
   return data;
 };
 

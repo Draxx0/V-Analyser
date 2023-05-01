@@ -12,6 +12,7 @@ const MapDashboard = () => {
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);
   const [mapData, setMapData] = useState<IMap[]>([]);
   const [currentMap, setCurrentMap] = useState<IMap[]>([]);
+  const [isData, setIsData] = useState<boolean>(false);
 
   const getMapData = async (mapName: string): Promise<void> => {
     if (player) {
@@ -37,6 +38,10 @@ const MapDashboard = () => {
   useEffect(() => {
     if (mapData.length > 0) {
       setCurrentMap(mapData);
+      setIsData(true)
+    } else {
+      setCurrentMap([]);
+      setIsData(false)
     }
   }, [mapData]);
 
@@ -61,8 +66,8 @@ const MapDashboard = () => {
           </div>
         </div>
 
-        <div className="col-start-2 col-end-7 row-start-1 gradient h-full w-full relative">
-          <MapDetails currentMap={currentMap} />
+        <div className={`col-start-2 col-end-7 row-start-1 gradient ${isData ? "h-full" : "h-fit"} w-full relative`}>
+          <MapDetails currentMap={currentMap} isData={isData} />
         </div>
       </div>
     </section >

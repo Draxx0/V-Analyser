@@ -2,6 +2,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { IoMapSharp } from "react-icons/io5";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
+import { RiInformationFill } from "react-icons/ri";
 import Logo from "/assets/images/valorant.png";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
@@ -14,18 +15,25 @@ const Navbar = () => {
       <img src={Logo} alt="" className="w-14" />
 
       <ul className="flex flex-col gap-10 relative bottom-20 md:flex-row md:bottom-0">
-        <li>
+        <li title="game stats">
           <NavLink to={"/dashboard"}>
             <BsFillGridFill className="2sm: w-6" />
           </NavLink>
         </li>
-        <li>
+
+        <li title="map stats">
           <NavLink to={"/maps"}>
             <IoMapSharp className="2sm: w-6" />
           </NavLink>
         </li>
 
-        <li>
+        <li title="game content informations">
+          <NavLink to={"/content"}>
+            <RiInformationFill className="2sm: w-6" />
+          </NavLink>
+        </li>
+
+        <li title="news about game">
           <NavLink to={"/news"}>
             <IoNewspaperSharp className="2sm: w-6" />
           </NavLink>
