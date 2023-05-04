@@ -3,6 +3,14 @@
    {
      "source": "/dashboard/competitive",
      "destination": "/"
+   },
+   {
+    "source": "/maps",
+    "destination": "/"
+   },
+   {
+    "source": "/news",
+    "destination": "/"
    }
  ]
 }
