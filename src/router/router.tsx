@@ -6,7 +6,6 @@ import NotFoundRouteProtect from "./NotFoundRouteProtect";
 import DashboardNotCompetitive from "../pages/Dashboard/Dashboard-not-competitive";
 import News from "../pages/News";
 import MapDashboard from "../pages/Map/MapDashboard";
-import Content from "../pages/Content";
 
 const Router = () => {
   return (
@@ -35,15 +34,6 @@ const Router = () => {
         element={
           <ProtectedRoute>
             <MapDashboard />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/content"
-        element={
-          <ProtectedRoute>
-            <Content />
           </ProtectedRoute>
         }
       />

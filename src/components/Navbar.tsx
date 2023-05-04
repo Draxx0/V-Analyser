@@ -27,12 +27,6 @@ const Navbar = () => {
           </NavLink>
         </li>
 
-        <li title="game content informations">
-          <NavLink to={"/content"}>
-            <RiInformationFill className="2sm: w-6" />
-          </NavLink>
-        </li>
-
         <li title="news about game">
           <NavLink to={"/news"}>
             <IoNewspaperSharp className="2sm: w-6" />
