@@ -29,8 +29,7 @@ const getCompetitive = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?mode=competitive`
   );
-  const slicedData =
-    response.data.data.length >= 6 && response.data.data.slice(0, 6);
+  const slicedData = response.data.data.length >= 6 && response.data.data.slice(0, 6);
   response.data.data = slicedData;
   return response.data;
 };
