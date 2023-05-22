@@ -30,6 +30,15 @@ const Router = () => {
       />
 
       <Route
+        path="/dashboard/swiftplay"
+        element={
+          <ProtectedRoute>
+            <DashboardNotCompetitive />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/maps"
         element={
           <ProtectedRoute>

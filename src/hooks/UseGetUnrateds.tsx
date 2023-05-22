@@ -7,10 +7,10 @@ import { useContext, useEffect, useState } from "react";
 const useGetUnrateds = () => {
   const [unrateds, setUnrateds] = useState<IPlayerMatchData[] | null>(null);
   const { player } = useContext(PlayerContext);
-  const location = useLocation();
+
 
   const getUnrateds = async () => {
-    if (player && location.pathname !== "/dashboard/competitive") {
+    if (player) {
       try {
         const response = await ApiService.getUnrated(
           player.region,

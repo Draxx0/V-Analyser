@@ -4,16 +4,27 @@ import { GiHeadshot, GiLegArmor, GiShoulderArmor } from "react-icons/gi";
 import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import Loading from "./Loading";
 import { agentIconFunction } from "../functions/agentIconFunction";
+import { useEffect, useState } from "react";
 
 type IProps = {
   lastMatch: IPlayerMatchData;
 };
 
 const LastMatch = ({ lastMatch }: IProps) => {
-  const shotsSum =
-    lastMatch?.stats?.shots.head +
-    lastMatch?.stats?.shots.body +
-    lastMatch?.stats?.shots.leg;
+  const [shotsSum, setShotsSum] = useState<number>(0);
+
+  console.log("LAST MATCH", lastMatch);
+
+  useEffect(() => {
+    if (lastMatch.stats) {
+      setShotsSum(
+        lastMatch.stats.shots.head +
+        lastMatch.stats.shots.body +
+        lastMatch.stats.shots.leg
+      );
+    }
+  }, [lastMatch]);
+
   return (
     <>
       <div className="flex justify-between gradient-purple w-full h-full relative">

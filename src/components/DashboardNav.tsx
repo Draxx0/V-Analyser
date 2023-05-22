@@ -16,6 +16,13 @@ const DashboardNav = () => {
       >
         unrated
       </NavLink>
+
+      <NavLink
+        to={"/dashboard/swiftplay"}
+        className="uppercase text-gray font-bold hover:dashboard-link-hover dashboard-link"
+      >
+        swiftplay
+      </NavLink>
     </nav>
   );
 };

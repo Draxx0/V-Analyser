@@ -6,20 +6,30 @@ import { IPlayerMatchData } from "../../types/player-competitive.type";
 import { useState, useEffect } from "react";
 import NoDataFound from "../../components/NoDataFound";
 import Loading from "../../components/Loading";
+import { useLocation } from "react-router-dom";
+import useGetSwiftplay from "../../hooks/UseGetSwiftplay";
 
 const DashboardNotCompetitive = () => {
+  const location = useLocation();
   const [lastMatch, setLastMatch] = useState<IPlayerMatchData>(
     {} as IPlayerMatchData
   );
-  const [noData, setNoData] = useState<boolean>(false);
 
   const { unrateds } = useGetUnrateds();
+  const { swiftplays } = useGetSwiftplay();
 
   useEffect(() => {
-    if (unrateds && unrateds.length > 0) {
+    if (location.pathname === "/dashboard/unrated" && unrateds && unrateds.length > 0) {
       setLastMatch(unrateds[0].matchData);
     }
-  }, [unrateds]);
+  }, [unrateds, location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname === "/dashboard/swiftplay" && swiftplays && swiftplays.length > 0) {
+      console.log(swiftplays[0])
+      setLastMatch(swiftplays[0]);
+    }
+  }, [swiftplays, location.pathname]);
 
   return (
     <section className="mt-10">
@@ -29,7 +39,7 @@ const DashboardNotCompetitive = () => {
       </div>
 
 
-      {unrateds && unrateds.length > 0 ? (
+      {unrateds && unrateds.length > 0 || swiftplays && swiftplays && swiftplays.length > 0 ? (
         <MatchDashboardContent
           lastMatch={lastMatch}
           setLastMatch={setLastMatch}

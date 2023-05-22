@@ -11,6 +11,7 @@ import {
 import Loading from "./Loading";
 import { useLocation } from "react-router-dom";
 import useGetUnrateds from "../hooks/UseGetUnrateds";
+import useGetSwiftplay from "../hooks/UseGetSwiftplay";
 
 const LastMatches = ({
   setLastMatch,
@@ -21,6 +22,7 @@ const LastMatches = ({
     IPlayerMatchDataWithRankAndTeamScore[]
   >([]);
   const location = useLocation();
+  const { getSwiftplay } = useGetSwiftplay();
   const { getUnrateds } = useGetUnrateds();
   const { playerCompetitive, setPlayerCompetitive, getCompetitiveMatchData } =
     useContext(PlayerContext);
@@ -32,15 +34,20 @@ const LastMatches = ({
         break;
 
       case "/dashboard/unrated":
-        const matchResults = await getUnrateds();
-        setMatchResults(matchResults);
+        const unrateds = await getUnrateds();
+        setMatchResults(unrateds);
+        break;
+
+      case "/dashboard/swiftplay":
+        const swiftplays = await getSwiftplay();
+        setMatchResults(swiftplays);
         break;
     }
   };
 
   useEffect(() => {
     SwicthCaseMatch();
-  }, []);
+  }, [location.pathname]);
 
   const addRankToMatch = async () => {
     const updatedPlayerCompetitive = await Promise.all(
@@ -76,7 +83,7 @@ const LastMatches = ({
             Last Matches
           </h2>
           <div className="flex flex-col gap-4">
-            {matchResults.map((match: any) => (
+            {matchResults.map((match: IPlayerMatchDataWithRankAndTeamScore) => (
               <div
                 className={`grid grid-cols-4 items-center p-2 cursor-pointer hover:border-5 hover:border-white hover:scale-[1.02] ${didTeamWin(match.matchData.stats.team, match.teamScores)
                   ? "win"

@@ -29,7 +29,8 @@ const getCompetitive = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?mode=competitive`
   );
-  const slicedData = response.data.data.length >= 6 && response.data.data.slice(0, 6);
+  const slicedData =
+    response.data.data.length >= 6 && response.data.data.slice(0, 6);
   response.data.data = slicedData;
   return response.data;
 };
@@ -51,6 +52,27 @@ const getUnrated = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?mode=unrated`
   );
+
+  const slicedData =
+    response.data.data.length >= 6
+      ? response.data.data.slice(0, 6)
+      : response.data.data;
+  response.data.data = slicedData;
+  return response.data;
+};
+
+const getSwiftplay = async (
+  region: string,
+  name: string,
+  tag: string
+): Promise<any> => {
+  const response = await axios.get(
+    `${
+      import.meta.env.VITE_APP_API_URL
+    }/lifetime/matches/${region}/${name}/${tag}?mode=swiftplay`
+  );
+
+  console.log(response.data);
 
   const slicedData =
     response.data.data.length >= 6
@@ -83,7 +105,7 @@ const getMap = async (
       map.meta.mode !== "Swiftplay"
   );
 
-  console.log(data)
+  console.log(data);
   return data;
 };
 
@@ -123,6 +145,7 @@ const ApiService: ApiServiceMethods = {
   getCompetitive,
   getCompetitiveMatch,
   getUnrated,
+  getSwiftplay,
   getPlayerMmr,
   getMap,
 };
