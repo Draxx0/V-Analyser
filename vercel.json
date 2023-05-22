@@ -9,6 +9,10 @@
       "destination": "/"
     },
     {
+      "source": "/dashboard/swiftplay",
+      "destination": "/"
+    },
+    {
       "source": "/maps",
       "destination": "/"
     },
