@@ -1,16 +1,20 @@
 {
- "rewrites": [
-   {
-     "source": "/dashboard/competitive",
-     "destination": "/"
-   },
-   {
-    "source": "/maps",
-    "destination": "/"
-   },
-   {
-    "source": "/news",
-    "destination": "/"
-   }
- ]
+  "rewrites": [
+    {
+      "source": "/dashboard/competitive",
+      "destination": "/"
+    },
+    {
+      "source": "/dashboard/unrated",
+      "destination": "/"
+    },
+    {
+      "source": "/maps",
+      "destination": "/"
+    },
+    {
+      "source": "/news",
+      "destination": "/"
+    }
+  ]
 }
