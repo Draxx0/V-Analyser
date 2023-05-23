@@ -13,11 +13,13 @@ type IProps = {
 const LastMatch = ({ lastMatch }: IProps) => {
 
   const shotsSum = useMemo(() => {
+
     return (
-      lastMatch.stats.shots.head +
-      lastMatch.stats.shots.body +
-      lastMatch.stats.shots.leg
+      lastMatch.stats?.shots.head +
+      lastMatch.stats?.shots.body +
+      lastMatch.stats?.shots.leg
     );
+
   }, [lastMatch]);
 
   return (
