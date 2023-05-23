@@ -3,6 +3,7 @@ import ApiService from "../services/api.service";
 import { separateUsernameAndTag } from "../functions/separateUsernameAndTag";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useNavigate } from "react-router-dom";
+import { IPlayerResponse } from "../types/player.type";
 
 const Auth = () => {
   const { setPlayer } = useContext(PlayerContext);
@@ -16,7 +17,7 @@ const Auth = () => {
     try {
       const trimmedUsername: string = formUsername.trim();
       const { username, tag } = separateUsernameAndTag(trimmedUsername);
-      const account: any = await ApiService.getAccount(username, tag);
+      const account: IPlayerResponse = await ApiService.getAccount(username, tag);
       localStorage.setItem("player", JSON.stringify(account.data));
       setPlayer(account.data);
       navigate("/dashboard/competitive");

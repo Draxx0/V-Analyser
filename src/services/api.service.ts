@@ -4,6 +4,7 @@ import { IPlayerMatchResponse } from "../types/player-competitive.type";
 import { IMapResponse } from "../types/map.type";
 import { PlayerMmrData } from "../types/playerMmr.type";
 import { IMap } from "../types/map.type";
+import { News } from "../types/news.type";
 
 interface ApiServiceMethods {
   [key: string]: (...args: any[]) => Promise<any>;
@@ -15,6 +16,13 @@ const getAccount = async (
 ): Promise<IPlayerResponse> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/account/${name}/${tag}`
+  );
+  return response.data;
+};
+
+const getNews = async (): Promise<News[]> => {
+  const response = await axios.get(
+    `${import.meta.env.VITE_APP_API_URL}/website/en-us`
   );
   return response.data;
 };
@@ -71,8 +79,6 @@ const getSwiftplay = async (
       import.meta.env.VITE_APP_API_URL
     }/lifetime/matches/${region}/${name}/${tag}?mode=swiftplay`
   );
-
-  console.log(response.data);
 
   const slicedData =
     response.data.data.length >= 6
@@ -142,6 +148,7 @@ const getPlayerMmr = async (region: string, name: string, tag: string) => {
 
 const ApiService: ApiServiceMethods = {
   getAccount,
+  getNews,
   getCompetitive,
   getCompetitiveMatch,
   getUnrated,

@@ -1,47 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { NewsData } from "../types/news.type";
 import Pagination from "../components/Pagination";
 import NewsList from "../components/NewsList";
 import PlayerWidget from "../components/PlayerWidget";
 import NewsFilter from "../components/NewsFilter";
+import ApiService from "../services/api.service";
 
 const News = () => {
   const [news, setNews] = useState<NewsData[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const articlesPerPage = 8;
 
-  const handlePageChange = (pageNumber: number) => {
+  const getNews = async (): Promise<void> => {
+    try {
+      const response = await ApiService.getNews().then((res) => res.data);
+      setNews(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePageChange = (pageNumber: number): void => {
     setCurrentPage(pageNumber);
   };
 
-  const handleCategorySelect = (category: string) => {
+  const handleCategorySelect = (category: string): void => {
     if (category === "all") setSelectedCategory("");
     else setSelectedCategory(category);
     setCurrentPage(1);
   };
 
-  const filteredNews = selectedCategory
-    ? news.filter((article) => article.category === selectedCategory)
-    : news;
+  const filteredNews = useMemo(() =>
+    selectedCategory ? news.filter((article) => article.category === selectedCategory) : news,
+    [selectedCategory, news]);
 
-  const indexOfLastArticle = currentPage * articlesPerPage;
-  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = filteredNews.slice(
-    indexOfFirstArticle,
-    indexOfLastArticle
-  );
+  const indexOfLastArticle = useMemo(() => currentPage * articlesPerPage, [currentPage, articlesPerPage])
 
-  const getNews = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_APP_API_URL}/website/en-us`
-      ).then((res) => res.json());
-      setNews(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const indexOfFirstArticle = useMemo(() => indexOfLastArticle - articlesPerPage, [indexOfLastArticle, articlesPerPage]);
+
+  const currentArticles = useMemo(() => {
+    return filteredNews.slice(
+      indexOfFirstArticle,
+      indexOfLastArticle
+    )
+  }, [filteredNews, indexOfFirstArticle, indexOfLastArticle])
 
   useEffect(() => {
     getNews();
