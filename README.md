@@ -1,6 +1,6 @@
 # V-Analyser
 
-### V-analyser is a simplified valorant tracker that will allow you to view your last matches ranked & unranked, you will be able to see the details of your match. A maps section is available and allows you to consult your statistics on each of the maps of the game, and finally you find the news section that allows you to learn about the articles released by Valorant.
+V-analyser is a simplified valorant tracker that will allow you to view your last matches ranked & unranked, you will be able to see the details of your match. A maps section is available and allows you to consult your statistics on each of the maps of the game, and finally you find the news section that allows you to learn about the articles released by Valorant.
 
 ## Frameworks, Libs & Tools :
 
