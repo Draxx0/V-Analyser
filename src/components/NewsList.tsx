@@ -3,7 +3,7 @@ import { NewsData } from "../types/news.type";
 import { formatDate } from "../functions/formatDate";
 import { sliceText } from "../functions/sliceText";
 import { BsPlayFill } from "react-icons/bs";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 
 interface Props {
   articles: NewsData[];

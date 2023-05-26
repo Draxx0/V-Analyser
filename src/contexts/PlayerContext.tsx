@@ -8,7 +8,7 @@ import {
   useEffect,
 } from "react";
 import { PlayerData } from "../types/player.type";
-import { PlayerMmrData } from "../types/playerMmr.type";
+import { PlayerMmrData } from "../types/player.type";
 import ApiService from "../services/api.service";
 
 type IProps = {
@@ -18,61 +18,33 @@ type IProps = {
 type PlayerType = {
   player: PlayerData | null;
   setPlayer: Dispatch<SetStateAction<PlayerData | null>>;
-  playerCompetitive: any; //! TYPAGE A CHANGER
-  setPlayerCompetitive: Dispatch<SetStateAction<any>>; //! TYPAGE A CHANGER
   playerMmr: PlayerMmrData | null;
   setPlayerMmr: Dispatch<SetStateAction<PlayerMmrData | null>>;
   Signout: () => void;
-  getCompetitiveData: () => void;
   getCompetitiveMatchData: (matchId: string) => void;
   getMmrData: () => void;
 };
 
 const PlayerContext = createContext<PlayerType>({
   player: null,
-  setPlayer: () => {},
-  playerCompetitive: null,
-  setPlayerCompetitive: () => {},
+  setPlayer: () => { },
   playerMmr: null,
-  setPlayerMmr: () => {},
-  Signout: () => {},
-  getCompetitiveData: () => {},
-  getCompetitiveMatchData: () => {},
-  getMmrData: () => {},
+  setPlayerMmr: () => { },
+  Signout: () => { },
+  getCompetitiveMatchData: () => { },
+  getMmrData: () => { },
 });
 
 const PlayerContextProvider: FC<IProps> = ({ children }) => {
   const [player, setPlayer] = useState<PlayerData | null>(null);
-  const [playerCompetitive, setPlayerCompetitive] = useState<any>(null);
   const [playerMmr, setPlayerMmr] = useState<PlayerMmrData | null>(null);
 
   const Signout = (): void => {
     setPlayer(null);
-    setPlayerCompetitive(null);
     setPlayerMmr(null);
     localStorage.removeItem("player");
-    localStorage.removeItem("playerCompetitive");
     localStorage.removeItem("playerMmr");
     window.location.href = "/";
-  };
-
-  const getCompetitiveData = async (): Promise<void> => {
-    if (player) {
-      try {
-        const response = await ApiService.getCompetitive(
-          player.region,
-          player.name,
-          player.tag
-        );
-        localStorage.setItem(
-          "playerCompetitive",
-          JSON.stringify(response.data)
-        );
-        setPlayerCompetitive(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
   };
 
   const getCompetitiveMatchData = async (matchId: string): Promise<string> => {
@@ -113,15 +85,6 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
       setPlayer(JSON.parse(playerInfo as unknown as string));
     }
 
-    if (localStorage.getItem("playerCompetitive")) {
-      const playerCompetitiveInfo: any = localStorage.getItem(
-        "playerCompetitive"
-      ) as any;
-      setPlayerCompetitive(
-        JSON.parse(playerCompetitiveInfo as unknown as string)
-      );
-    }
-
     if (localStorage.getItem("playerMmr")) {
       const playerMmrInfo: PlayerMmrData | null = localStorage.getItem(
         "playerMmr"
@@ -135,11 +98,8 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
       value={{
         player,
         setPlayer,
-        playerCompetitive,
-        setPlayerCompetitive,
         playerMmr,
         setPlayerMmr,
-        getCompetitiveData,
         getCompetitiveMatchData,
         getMmrData,
         Signout,

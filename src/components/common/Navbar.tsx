@@ -6,7 +6,7 @@ import { RiInformationFill } from "react-icons/ri";
 import Logo from "/assets/images/valorant.png";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../../contexts/PlayerContext";
 
 const Navbar = () => {
   const { Signout } = useContext(PlayerContext);

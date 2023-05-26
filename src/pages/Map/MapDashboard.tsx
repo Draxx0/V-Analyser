@@ -1,12 +1,12 @@
 import MapDetails from "../../components/MapDetails";
 import MapItem from "../../components/MapItem";
-import PlayerWidget from "../../components/PlayerWidget";
+import PlayerWidget from "../../components/common/PlayerWidget";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import localMapsJson from "../../data/maps.json";
 import ApiService from "../../services/api.service";
 import { ILocalMap, IMap, IMapResponse } from "../../types/map.type";
 import { useEffect, useState, useContext } from "react";
-import Loading from "../../components/Loading";
+import Loading from "../../components/common/Loading";
 const MapDashboard = () => {
   const { player } = useContext(PlayerContext);
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);

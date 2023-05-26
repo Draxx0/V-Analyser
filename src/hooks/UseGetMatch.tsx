@@ -3,16 +3,18 @@ import { useEffect, useState, useContext } from "react"
 import { PlayerContext } from "../contexts/PlayerContext"
 import { IPlayerMatch } from "../types/gamemodes"
 
-const useGetSwiftplay = () => {
- const [swiftplays, setSwiftplays] = useState<IPlayerMatch[]>([])
+const UseGetMatch = () => {
+ const [competitives, setCompetitives] = useState<IPlayerMatch[]>([])
  const { player } = useContext(PlayerContext)
 
- const getSwiftplay = async () => {
+ const getCompetitive = async () => {
   if (player) {
    try {
-    const response = await ApiService.getSwiftplay(player.region, player.name, player.tag)
-    setSwiftplays(response)
-    return response
+    const response = await ApiService.getCompetitive(player.region, player.name, player.tag)
+
+    setCompetitives(response.data)
+
+    return response.data
    } catch (error) {
     console.log(error)
    }
@@ -22,11 +24,11 @@ const useGetSwiftplay = () => {
  }
 
  useEffect(() => {
-  getSwiftplay()
+  getCompetitive()
  }, [player])
 
 
- return { swiftplays, setSwiftplays, getSwiftplay }
+ return { competitives, setCompetitives, getCompetitive }
 }
 
-export default useGetSwiftplay
+export default UseGetMatch

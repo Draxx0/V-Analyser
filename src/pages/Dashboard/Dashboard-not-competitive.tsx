@@ -1,11 +1,11 @@
-import DashboardNav from "../../components/DashboardNav";
+import DashboardNav from "../../components/common/DashboardNav";
 import MatchDashboardContent from "../../components/MatchDashboardContent";
-import PlayerWidget from "../../components/PlayerWidget";
+import PlayerWidget from "../../components/common/PlayerWidget";
 import useGetUnrateds from "../../hooks/UseGetUnrateds";
-import { IPlayerMatchData } from "../../types/player-competitive.type";
+import { IPlayerMatchData } from "../../types/gamemodes";
 import { useState, useEffect } from "react";
-import NoDataFound from "../../components/NoDataFound";
-import Loading from "../../components/Loading";
+import NoDataFound from "../../components/common/NoDataFound";
+import Loading from "../../components/common/Loading";
 import { useLocation } from "react-router-dom";
 import useGetSwiftplay from "../../hooks/UseGetSwiftplay";
 

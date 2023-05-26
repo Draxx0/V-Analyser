@@ -1,24 +1,42 @@
 import { PlayerContext } from "../contexts/PlayerContext";
-import { useContext } from "react";
-import { IPlayerMatchData } from "../types/player-competitive.type";
+import { useContext, useEffect, useState } from "react";
 import LastMatch from "./LastMatch";
 import LastMatches from "./LastMatches";
 import Rating from "./Rating";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 import { useLocation } from "react-router-dom";
 import HighestRating from "./HighestRating";
+import { IPlayerMatch, IPlayerMatchDataWithRank } from "../types/gamemodes";
+import ApiService from "../services/api.service";
+import useGetCompetitive from "../hooks/UseGetCompetitive";
 
 interface Props {
-  lastMatch: IPlayerMatchData;
-  setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatchData>>;
+  lastMatch: IPlayerMatch;
+  setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatch>>;
 }
 
-const MatchDashboardContent = ({ lastMatch, setLastMatch }: Props) => {
-  const { playerCompetitive, playerMmr } = useContext(PlayerContext);
+const MatchDashboardContent = () => {
   const location = useLocation();
+
+  const { getMmrData, player, playerMmr } =
+    useContext(PlayerContext);
+
+  const [lastMatch, setLastMatch] = useState<IPlayerMatch | IPlayerMatchDataWithRank | null>(null);
+
+  useEffect(() => {
+    getMmrData();
+  }, [player]);
+
+  // useEffect(() => {
+  //   if (competitives) {
+  //     setLastMatch(competitives[0]);
+  //     console.log("LOOP")
+  //   }
+  // }, [competitives]);
+
   return (
     <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5">
-      {playerCompetitive && playerMmr ? (
+      {playerMmr ? (
         <>
           <div className="col-start-1 col-end-5 row-start-1 row-end-1 block h-full xl:col-start-1 xl:col-end-7">
             <LastMatch lastMatch={lastMatch} />

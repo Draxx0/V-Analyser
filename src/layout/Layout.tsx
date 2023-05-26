@@ -1,5 +1,5 @@
 import { ReactNode, FC, useContext } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar";
 import { PlayerContext } from "../contexts/PlayerContext";
 
 type IProps = {

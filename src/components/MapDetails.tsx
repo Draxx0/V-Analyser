@@ -4,7 +4,7 @@ import { agentSplashartFunction } from "../functions/agentSplashartFunction";
 import { IMap } from "../types/map.type";
 import { mapDataCalculator } from "../functions/mapDataCalculator";
 import { agentIconFunction } from "../functions/agentIconFunction";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 
 const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
   return (

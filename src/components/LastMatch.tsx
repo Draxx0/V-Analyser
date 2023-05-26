@@ -1,29 +1,27 @@
-import { IPlayerMatchData } from "../types/player-competitive.type";
+import { IPlayerMatch } from "../types/gamemodes";
 import { formatDate } from "../functions/formatDate";
 import { GiHeadshot, GiLegArmor, GiShoulderArmor } from "react-icons/gi";
 import { agentSplashartFunction } from "../functions/agentSplashartFunction";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 import { agentIconFunction } from "../functions/agentIconFunction";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 type IProps = {
-  lastMatch: IPlayerMatchData;
+  lastMatch: IPlayerMatch | null;
 };
 
 const LastMatch = ({ lastMatch }: IProps) => {
 
   const shotsSum = useMemo(() => {
-    return (
-      lastMatch.stats?.shots.head +
-      lastMatch.stats?.shots.body +
-      lastMatch.stats?.shots.leg
-    );
+    if (lastMatch) {
+      return lastMatch.stats.shots.head + lastMatch.stats.shots.body + lastMatch.stats.shots.leg;
+    } else return 0;
   }, [lastMatch]);
 
   return (
     <>
       <div className="flex justify-between gradient-purple w-full h-full relative">
-        {lastMatch.stats ? (
+        {lastMatch?.stats ? (
           <>
             <div className="flex flex-col justify-evenly relative bottom-4 w-1/2 gap-10 md:w-full md:p-6 2sm:p-2">
               <h2 className="text-xl tracking-wide uppercase font-bold">

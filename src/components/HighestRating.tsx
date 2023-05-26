@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 import { rankIconFunction } from "../functions/rankIconFunction";
 
 const HighestRating = () => {

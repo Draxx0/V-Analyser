@@ -1,4 +1,4 @@
-import NoDataGif from "../../public/assets/images/nodata.gif"
+import NoDataGif from "../../../public/assets/images/nodata.gif"
 import { AiOutlineReload } from "react-icons/ai";
 
 const NoDataFound = () => {

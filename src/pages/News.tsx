@@ -1,13 +1,13 @@
 import { useEffect, useState, useMemo } from "react";
-import { NewsData } from "../types/news.type";
+import { INews } from "../types/news.type";
 import Pagination from "../components/Pagination";
 import NewsList from "../components/NewsList";
-import PlayerWidget from "../components/PlayerWidget";
+import PlayerWidget from "../components/common/PlayerWidget";
 import NewsFilter from "../components/NewsFilter";
 import ApiService from "../services/api.service";
 
 const News = () => {
-  const [news, setNews] = useState<NewsData[]>([]);
+  const [news, setNews] = useState<INews[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const articlesPerPage = 8;
@@ -27,6 +27,7 @@ const News = () => {
 
   const handleCategorySelect = (category: string): void => {
     if (category === "all") setSelectedCategory("");
+
     else setSelectedCategory(category);
     setCurrentPage(1);
   };

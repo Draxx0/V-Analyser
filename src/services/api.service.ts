@@ -1,48 +1,37 @@
 import axios from "axios";
 import { IPlayerResponse } from "../types/player.type";
-import { IPlayerMatchResponse } from "../types/player-competitive.type";
+import { IPlayerMatch } from "../types/gamemodes";
 import { IMapResponse } from "../types/map.type";
-import { PlayerMmrData } from "../types/playerMmr.type";
+import { PlayerMmrData } from "../types/player.type";
 import { IMap } from "../types/map.type";
-import { News } from "../types/news.type";
+import { INewsResponse } from "../types/news.type";
+import { sliceMatchsReponse } from "../functions/sliceMatchsReponse";
 
 interface ApiServiceMethods {
   [key: string]: (...args: any[]) => Promise<any>;
 }
 
-const getAccount = async (
-  name: string,
-  tag: string
-): Promise<IPlayerResponse> => {
+// ACCOUNT
+
+const getAccount = async ( name: string,tag: string ): Promise<IPlayerResponse> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/account/${name}/${tag}`
   );
   return response.data;
 };
 
-const getNews = async (): Promise<News[]> => {
+// NEWS
+
+const getNews = async (): Promise<INewsResponse[]> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/website/en-us`
   );
   return response.data;
 };
 
-const getCompetitive = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<IPlayerMatchResponse> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=competitive`
-  );
-  const slicedData =
-    response.data.data.length >= 6 && response.data.data.slice(0, 6);
-  response.data.data = slicedData;
-  return response.data;
-};
+// MATCH(S)
 
+//! TYPED RESPONSE
 const getCompetitiveMatch = async (matchId: string) => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL_V2}/match/${matchId}`
@@ -50,43 +39,7 @@ const getCompetitiveMatch = async (matchId: string) => {
   return response.data;
 };
 
-const getUnrated = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<IPlayerMatchResponse> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=unrated`
-  );
-
-  const slicedData =
-    response.data.data.length >= 6
-      ? response.data.data.slice(0, 6)
-      : response.data.data;
-  response.data.data = slicedData;
-  return response.data;
-};
-
-const getSwiftplay = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<any> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=swiftplay`
-  );
-
-  const slicedData =
-    response.data.data.length >= 6
-      ? response.data.data.slice(0, 6)
-      : response.data.data;
-  response.data.data = slicedData;
-  return response.data;
-};
+// MAP(S)
 
 const getMap = async (
   region: string,
@@ -111,7 +64,6 @@ const getMap = async (
       map.meta.mode !== "Swiftplay"
   );
 
-  console.log(data);
   return data;
 };
 
@@ -144,6 +96,57 @@ const getPlayerMmr = async (region: string, name: string, tag: string) => {
     },
   };
   return MmrData;
+};
+
+// GAMEMODES  
+
+const getCompetitive = async (
+  region: string,
+  name: string,
+  tag: string
+): Promise<IPlayerMatch[]> => {
+  const response = await axios.get(
+    `${
+      import.meta.env.VITE_APP_API_URL
+    }/lifetime/matches/${region}/${name}/${tag}?mode=competitive`
+  );
+  
+  const slicedData = sliceMatchsReponse(response.data.data);
+
+  return slicedData;
+};
+
+
+const getUnrated = async (
+  region: string,
+  name: string,
+  tag: string
+): Promise<IPlayerMatch[]> => {
+  const response = await axios.get(
+    `${
+      import.meta.env.VITE_APP_API_URL
+    }/lifetime/matches/${region}/${name}/${tag}?mode=unrated`
+  );
+
+  const slicedData = sliceMatchsReponse(response.data.data);
+
+  return slicedData;
+};
+
+const getSwiftplay = async (
+  region: string,
+  name: string,
+  tag: string
+): Promise<IPlayerMatch[]> => {
+  const response = await axios.get(
+    `${
+      import.meta.env.VITE_APP_API_URL
+    }/lifetime/matches/${region}/${name}/${tag}?mode=swiftplay`
+  );
+
+  const slicedData = sliceMatchsReponse(response.data.data);
+
+  return slicedData;
 };
 
 const ApiService: ApiServiceMethods = {

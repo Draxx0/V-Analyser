@@ -1,5 +1,6 @@
-export interface IMapResponse {
-  status: number;
+import { Status } from "./common/generic";
+
+export interface IMapResponse extends Status {
   name: string;
   tag: string;
   results: {
