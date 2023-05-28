@@ -1,11 +1,9 @@
-import { PlayerContext } from "../contexts/PlayerContext";
-import { useContext } from "react";
 import { rankIconFunction } from "../functions/rankIconFunction";
 import { rankIconByCurrentTier } from "../functions/rankIconByCurrentTier";
 import Loading from "./common/Loading";
+import { PlayerMmrData } from "../types/player.type";
 
-const Rating = () => {
-  const { playerMmr } = useContext(PlayerContext);
+const Rating = ({ playerMmr }: { playerMmr: PlayerMmrData }) => {
   return (
     <>
       {playerMmr ? (
@@ -35,8 +33,8 @@ const Rating = () => {
             </h4>
             <h4
               className={`text-l tracking-wide uppercase font-bold ${playerMmr.current_data.mmr_change_to_last_game > 0
-                  ? "text-green"
-                  : "text-red"
+                ? "text-green"
+                : "text-red"
                 }`}
             >
               {playerMmr.current_data.mmr_change_to_last_game > 0

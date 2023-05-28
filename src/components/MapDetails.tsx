@@ -1,12 +1,12 @@
 import { GiChewedSkull, GiSkullCrossedBones } from "react-icons/gi";
 import { FaHandsHelping } from "react-icons/fa";
 import { agentSplashartFunction } from "../functions/agentSplashartFunction";
-import { IMap } from "../types/map.type";
+import { Map } from "../types/map.type";
 import { mapDataCalculator } from "../functions/mapDataCalculator";
 import { agentIconFunction } from "../functions/agentIconFunction";
 import Loading from "./common/Loading";
 
-const MapDetails = ({ currentMap }: { currentMap: IMap[] }) => {
+const MapDetails = ({ currentMap }: { currentMap: Map[] }) => {
   return (
     <>
       {currentMap.length > 0 ? (

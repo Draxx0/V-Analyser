@@ -17,7 +17,7 @@ export type PlayerData = {
   card: PlayerCard;
 };
 
-type PlayerCard = {
+export type PlayerCard = {
   small: string;
   large: string;
   wide: string;

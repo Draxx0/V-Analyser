@@ -1,4 +1,4 @@
-import { IMap } from "../types/map.type";
+import { Map } from "../types/map.type";
 import { TeamScores, didTeamWin } from "./didTeamWin";
 
 interface AgentCount {
@@ -6,7 +6,7 @@ interface AgentCount {
 }
 
 export const mapDataCalculator = (
-  currentMap: IMap[],
+  currentMap: Map[],
   request: string
 ): string => {
   const getKills = (): string => {
@@ -125,7 +125,7 @@ export const mapDataCalculator = (
     let lossCount: number = 0;
 
     for (let index: number = 0; index < currentMap.length; index++) {
-      const element: IMap = currentMap[index];
+      const element: Map = currentMap[index];
       const teamScore: TeamScores = {
         blue: element.teams.blue,
         red: element.teams.red,

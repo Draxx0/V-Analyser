@@ -2,6 +2,7 @@ import ApiService from "../services/api.service"
 import { useEffect, useState, useContext } from "react"
 import { PlayerContext } from "../contexts/PlayerContext"
 import { IPlayerMatch, IPlayerMatchDataWithRank } from "../types/gamemodes"
+import { IMatch, PlayerInMatch } from "../types/match.type"
 
 const useGetCompetitive = () => {
  const [competitives, setCompetitives] = useState<IPlayerMatchDataWithRank[] | null>([])
@@ -10,10 +11,11 @@ const useGetCompetitive = () => {
  const getRankAtMatch = async (match: IPlayerMatch): Promise<string> => {
   try {
    //! TYPED RESPONSE
-   const response = await ApiService.getCompetitiveMatch(match.meta.id);
+   const response: IMatch = await ApiService.getCompetitiveMatch(match.meta.id);
    const playerMatch = response.data.players.all_players.find(
-    (playerInMatch: any) => playerInMatch.name === player?.name
+    (playerInMatch: PlayerInMatch) => playerInMatch.name === player?.name
    );
+   if (!playerMatch) throw new Error("Player not found in match")
    return playerMatch.currenttier_patched;
   } catch (error) {
    console.log(error);
@@ -22,7 +24,7 @@ const useGetCompetitive = () => {
  };
 
 
- const getCompetitive = async () => {
+ const getCompetitive = async (): Promise<IPlayerMatchDataWithRank[] | null> => {
   if (player) {
    try {
     const response = await ApiService.getCompetitive(player.region, player.name, player.tag)

@@ -4,20 +4,20 @@ import PlayerWidget from "../../components/common/PlayerWidget";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import localMapsJson from "../../data/maps.json";
 import ApiService from "../../services/api.service";
-import { ILocalMap, IMap, IMapResponse } from "../../types/map.type";
+import { ILocalMap, Map } from "../../types/map.type";
 import { useEffect, useState, useContext } from "react";
-import Loading from "../../components/common/Loading";
+
 const MapDashboard = () => {
   const { player } = useContext(PlayerContext);
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);
-  const [mapData, setMapData] = useState<IMap[]>([]);
-  const [currentMap, setCurrentMap] = useState<IMap[]>([]);
+  const [mapData, setMapData] = useState<Map[]>([]);
+  const [currentMap, setCurrentMap] = useState<Map[]>([]);
   const [isData, setIsData] = useState<boolean>(false);
 
   const getMapData = async (mapName: string): Promise<void> => {
     if (player) {
       try {
-        const response: IMap[] = await ApiService.getMap(
+        const response: Map[] = await ApiService.getMap(
           player.region,
           player.name,
           player.tag,

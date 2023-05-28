@@ -42,7 +42,6 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
     }
   };
 
-
   useEffect(() => {
     SwicthCaseMatch();
   }, [location.pathname]);
@@ -74,7 +73,6 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
                   <span>{match.meta.map.name}</span>
                   <div className="flex gap-1">
                     <span className="text-green font-bold">
-                      {/* Si le joueur été dans l'équipe bleu */}
                       {match.stats.team === "Blue" ? match.teams.blue : match.teams.red}
                     </span>
                     <span className="font-bold"> : </span>

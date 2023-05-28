@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import ApiService from "../services/api.service";
-import { ILocalMap, IMap, IMapResponse } from "../types/map.type";
+import { ILocalMap, Map, IMapResponse } from "../types/map.type";
 
 const MapItem = ({
   map,
   getMapData,
 }: {
   map: ILocalMap;
-  setMapData: React.Dispatch<React.SetStateAction<IMap[]>>;
+  setMapData: React.Dispatch<React.SetStateAction<Map[]>>;
   getMapData: (mapName: string) => Promise<void>;
 }) => {
   return (

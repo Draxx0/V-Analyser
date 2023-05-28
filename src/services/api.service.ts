@@ -3,9 +3,10 @@ import { IPlayerResponse } from "../types/player.type";
 import { IPlayerMatch } from "../types/gamemodes";
 import { IMapResponse } from "../types/map.type";
 import { PlayerMmrData } from "../types/player.type";
-import { IMap } from "../types/map.type";
+import { Map } from "../types/map.type";
 import { INewsResponse } from "../types/news.type";
 import { sliceMatchsReponse } from "../functions/sliceMatchsReponse";
+import { IMatch } from "../types/match.type";
 
 interface ApiServiceMethods {
   [key: string]: (...args: any[]) => Promise<any>;
@@ -31,8 +32,7 @@ const getNews = async (): Promise<INewsResponse[]> => {
 
 // MATCH(S)
 
-//! TYPED RESPONSE
-const getCompetitiveMatch = async (matchId: string) => {
+const getCompetitiveMatch = async (matchId: string): Promise<IMatch> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL_V2}/match/${matchId}`
   );
@@ -54,7 +54,7 @@ const getMap = async (
   );
 
   const data = response.data.data.filter(
-    (map: IMap) =>
+    (map: Map) =>
       map.meta.mode !== "Custom Game" &&
       map.meta.mode !== "Spike Rush" &&
       map.meta.mode !== "Deathmatch" &&

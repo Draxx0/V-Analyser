@@ -1,11 +1,11 @@
 import React from "react";
-import { NewsData } from "../types/news.type";
+import { INews } from "../types/news.type";
 
 interface Props {
   totalArticles: number;
   articlesPerPage: number;
   currentPage: number;
-  articles: NewsData[];
+  articles: INews[];
   onPageChange: (pageNumber: number) => void;
 }
 

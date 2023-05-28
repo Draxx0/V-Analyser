@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
 import Loading from "./common/Loading";
 import { rankIconFunction } from "../functions/rankIconFunction";
+import { PlayerMmrData } from "../types/player.type";
 
-const HighestRating = () => {
-  const { playerMmr } = useContext(PlayerContext);
+const HighestRating = ({ playerMmr }: { playerMmr: PlayerMmrData }) => {
   return (
     <>
       {playerMmr ? (
