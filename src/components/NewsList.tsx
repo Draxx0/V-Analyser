@@ -49,7 +49,7 @@ const NewsList: React.FC<Props> = ({ articles }) => {
           </div>
         ))
       ) : (
-        <Loading />
+        <Loading isAbsolute />
       )}
     </>
   );

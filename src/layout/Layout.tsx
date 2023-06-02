@@ -12,7 +12,7 @@ const Layout: FC<IProps> = ({ children }) => {
     <>
       {player && <Navbar />}
 
-      <main className="ml-1-12 w-full mr-7 md:mx-10 md:mt-20 md:m-auto">
+      <main className="ml-[8%] w-full mr-7 md:mx-10 md:mt-20 md:m-auto">
         <>{children}</>
       </main>
     </>

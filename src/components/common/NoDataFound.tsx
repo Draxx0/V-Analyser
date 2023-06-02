@@ -1,9 +1,9 @@
 import NoDataGif from "../../../public/assets/images/nodata.gif"
 import { AiOutlineReload } from "react-icons/ai";
 
-const NoDataFound = () => {
+const NoDataFound = ({ isAbsolute }: { isAbsolute?: boolean }) => {
  return (
-  <div className="absolute left-2/4 top-2/4 flex flex-col gap-3 translate-y-[-50%] translate-x-[-50%] w-full h-full items-center justify-center">
+  <div className={`flex flex-col gap-3 w-full h-full items-center justify-center ${isAbsolute && "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
    <h1 className="text-5xl font-bold text-red">No data found</h1>
    <img src={NoDataGif} alt="" className="w-64" />
    <div className="flex gap-2 items-center">

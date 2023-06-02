@@ -2,7 +2,7 @@ import LoadingImage from "/assets/images/loading.gif";
 import { useEffect, useState } from "react";
 import NoDataFound from "./NoDataFound";
 
-const Loading = () => {
+const Loading = ({ isAbsolute }: { isAbsolute?: boolean }) => {
   const [noData, setNodata] = useState<boolean>(false);
   useEffect(() => {
     setTimeout(() => {
@@ -12,14 +12,14 @@ const Loading = () => {
   return (
     <>
       {!noData ? (
-        <div className="absolute left-2/4 top-2/4 flex flex-col gap-3 translate-y-[-50%] translate-x-[-50%] w-full h-full items-center justify-center">
+        <div className={`flex flex-col gap-3 w-full h-full items-center justify-center ${isAbsolute && "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
           <img src={LoadingImage} alt="" className="w-32" />
           <span className="text-2xl font-semibold tracking-wide mt-6">
             Loading...
           </span>
         </div>
       ) : (
-        <NoDataFound />
+        <NoDataFound isAbsolute={isAbsolute} />
       )}
     </>
   );
