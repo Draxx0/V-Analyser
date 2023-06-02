@@ -79,6 +79,6 @@ export const rankIconByCurrentTier = (currentTier: number): string => {
       return "/assets/images/ranks/radiant.webp";
 
     default:
-      return "/assets/images/ranks/unranked.png";
+      return "/assets/images/ranks/unranked.webp";
   }
 };
