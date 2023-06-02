@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
-import ApiService from "../services/api.service";
-import { ILocalMap, Map, IMapResponse } from "../types/map.type";
+import { ILocalMap, Map } from "../types/map.type";
 
 const MapItem = ({
   map,
