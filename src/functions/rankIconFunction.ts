@@ -1,4 +1,4 @@
-export const rankIconFunction = (rank: string) => {
+export const rankIconFunction = (rank: string): string => {
   switch (rank) {
     case "Unranked":
       return "/assets/images/ranks/unranked.png";

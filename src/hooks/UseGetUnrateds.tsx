@@ -11,7 +11,7 @@ const useGetUnrateds = () => {
   const getUnrateds = async () => {
     if (player) {
       try {
-        const response = await ApiService.getUnrated(
+        const response: IPlayerMatch[] = await ApiService.getUnrated(
           player.region,
           player.name,
           player.tag

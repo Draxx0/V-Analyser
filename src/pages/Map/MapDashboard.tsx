@@ -66,7 +66,7 @@ const MapDashboard = () => {
           </div>
         </div>
 
-        <div className={`col-start-2 col-end-7 row-start-1 gradient ${isData ? "h-full" : "h-fit"} w-full relative min-h-[400px]`}>
+        <div className={`col-start-2 col-end-7 row-start-1 gradient ${isData ? "h-full" : "h-fit"} w-full relative`}>
           <MapDetails currentMap={currentMap} />
         </div>
       </div>

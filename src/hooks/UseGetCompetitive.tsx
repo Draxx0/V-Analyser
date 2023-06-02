@@ -10,7 +10,6 @@ const useGetCompetitive = () => {
 
  const getRankAtMatch = async (match: IPlayerMatch): Promise<string> => {
   try {
-   //! TYPED RESPONSE
    const response: IMatch = await ApiService.getCompetitiveMatch(match.meta.id);
    const playerMatch = response.data.players.all_players.find(
     (playerInMatch: PlayerInMatch) => playerInMatch.name === player?.name
@@ -27,7 +26,7 @@ const useGetCompetitive = () => {
  const getCompetitive = async (): Promise<IPlayerMatchDataWithRank[] | null> => {
   if (player) {
    try {
-    const response = await ApiService.getCompetitive(player.region, player.name, player.tag)
+    const response: IPlayerMatch[] = await ApiService.getCompetitive(player.region, player.name, player.tag)
 
     const updatedPlayerCompetitive: IPlayerMatchDataWithRank[] = await Promise.all(
      response.map(async (match: IPlayerMatch) => {
