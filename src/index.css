@@ -26,12 +26,12 @@ main:has(.auth) {
 
 input::placeholder {
   transition: 0.3s ease-in-out all;
-  transform: scale(1);
-  transform-origin: left;
+  opacity: 0.8;
 }
 
 input:focus::placeholder {
-  transform: scale(0);
+  opacity: 0;
+  transform: translateX(3px);
 }
 
 .win {

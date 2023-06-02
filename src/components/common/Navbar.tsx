@@ -2,7 +2,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { IoMapSharp } from "react-icons/io5";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
-import Logo from "/assets/images/valorant.png";
+import Logo from "/assets/images/valorant.webp";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext";
