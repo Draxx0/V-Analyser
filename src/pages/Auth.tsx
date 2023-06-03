@@ -16,9 +16,11 @@ const Auth = () => {
   const handleConnectData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const trimmedUsername: string = formUsername.trim();
-      const { username, tag } = separateUsernameAndTag(trimmedUsername);
-      const account: IPlayerResponse = await ApiService.getAccount(username, tag);
+      const { username, tag } = separateUsernameAndTag(formUsername.trim());
+      const account: IPlayerResponse = await ApiService.getAccount(
+        username,
+        tag
+      );
       localStorage.setItem("player", JSON.stringify(account.data));
       setPlayer(account.data);
       navigate("/dashboard/competitive");

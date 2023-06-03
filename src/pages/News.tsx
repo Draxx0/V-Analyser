@@ -27,25 +27,31 @@ const News = () => {
 
   const handleCategorySelect = (category: string): void => {
     if (category === "all") setSelectedCategory("");
-
     else setSelectedCategory(category);
     setCurrentPage(1);
   };
 
-  const filteredNews = useMemo(() =>
-    selectedCategory ? news.filter((article) => article.category === selectedCategory) : news,
-    [selectedCategory, news]);
+  const filteredNews = useMemo(
+    () =>
+      selectedCategory
+        ? news.filter((article) => article.category === selectedCategory)
+        : news,
+    [selectedCategory, news]
+  );
 
-  const indexOfLastArticle = useMemo(() => currentPage * articlesPerPage, [currentPage, articlesPerPage])
+  const indexOfLastArticle = useMemo(
+    () => currentPage * articlesPerPage,
+    [currentPage, articlesPerPage]
+  );
 
-  const indexOfFirstArticle = useMemo(() => indexOfLastArticle - articlesPerPage, [indexOfLastArticle, articlesPerPage]);
+  const indexOfFirstArticle = useMemo(
+    () => indexOfLastArticle - articlesPerPage,
+    [indexOfLastArticle, articlesPerPage]
+  );
 
   const currentArticles = useMemo(() => {
-    return filteredNews.slice(
-      indexOfFirstArticle,
-      indexOfLastArticle
-    )
-  }, [filteredNews, indexOfFirstArticle, indexOfLastArticle])
+    return filteredNews.slice(indexOfFirstArticle, indexOfLastArticle);
+  }, [filteredNews, indexOfFirstArticle, indexOfLastArticle]);
 
   useEffect(() => {
     getNews();

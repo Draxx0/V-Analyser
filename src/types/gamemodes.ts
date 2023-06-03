@@ -56,4 +56,3 @@ export interface IPlayerMatch {
 export interface IPlayerMatchDataWithRank extends IPlayerMatch {
   rank: string;
 }
-
