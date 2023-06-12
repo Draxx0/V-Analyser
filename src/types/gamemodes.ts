@@ -1,5 +1,7 @@
 import { IResponseResult, Status } from "./common/generic";
 
+export type Gamemode = "competitive" | "unrated" | "swiftplay";
+
 export interface IPlayerMatchResponse extends Status {
   name: string;
   tag: string;
@@ -56,4 +58,3 @@ export interface IPlayerMatch {
 export interface IPlayerMatchDataWithRank extends IPlayerMatch {
   rank: string;
 }
-

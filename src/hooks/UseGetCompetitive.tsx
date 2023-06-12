@@ -26,7 +26,7 @@ const useGetCompetitive = () => {
  const getCompetitive = async (): Promise<IPlayerMatchDataWithRank[] | null> => {
   if (player) {
    try {
-    const response: IPlayerMatch[] = await ApiService.getCompetitive(player.region, player.name, player.tag)
+    const response: IPlayerMatch[] = await ApiService.getGameMode(player.region, player.name, player.tag, "competitive")
 
     const updatedPlayerCompetitive: IPlayerMatchDataWithRank[] = await Promise.all(
      response.map(async (match: IPlayerMatch) => {

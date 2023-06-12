@@ -10,7 +10,7 @@ const useGetSwiftplay = () => {
  const getSwiftplay = async () => {
   if (player) {
    try {
-    const response: IPlayerMatch[] = await ApiService.getSwiftplay(player.region, player.name, player.tag)
+    const response: IPlayerMatch[] = await ApiService.getGameMode(player.region, player.name, player.tag, "swiftplay")
     setSwiftplays(response)
     return response
    } catch (error) {
