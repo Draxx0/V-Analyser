@@ -14,11 +14,15 @@ import useGetSwiftplay from "../hooks/UseGetSwiftplay";
 import useGetCompetitive from "../hooks/UseGetCompetitive";
 
 const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatch | IPlayerMatchDataWithRank | null>> }) => {
-  const [matchResults, setMatchResults] = useState<IPlayerMatchDataWithRank[] | null>([]);
+  const [matchResults, setMatchResults] = useState<IPlayerMatchDataWithRank[] | IPlayerMatch[] | null>([]);
   const location = useLocation();
   const { getSwiftplay } = useGetSwiftplay();
   const { getUnrateds } = useGetUnrateds();
   const { getCompetitive } = useGetCompetitive();
+
+  const isRankedMatch = (match: IPlayerMatchDataWithRank | IPlayerMatch): match is IPlayerMatchDataWithRank => {
+    return (match as IPlayerMatchDataWithRank).rank !== undefined
+  }
 
   const SwicthCaseMatch = async () => {
     switch (location.pathname) {
@@ -54,7 +58,7 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
             Last Matches
           </h2>
           <div className="flex flex-col gap-4">
-            {matchResults.map((match: IPlayerMatchDataWithRank) => (
+            {matchResults.map((match: IPlayerMatchDataWithRank | IPlayerMatch) => (
               <div
                 className={`grid grid-cols-4 items-center p-2 cursor-pointer hover:border-5 hover:border-white hover:scale-[1.02] ${didTeamWin(match.stats.team, match.teams)
                   ? "win"
@@ -99,7 +103,7 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
                   </div>
                 </div>
 
-                {match.rank && (
+                {isRankedMatch(match) && match.rank && (
                   <img
                     src={rankIconFunction(match.rank)}
                     alt="icon rank"
