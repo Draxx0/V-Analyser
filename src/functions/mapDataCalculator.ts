@@ -1,3 +1,4 @@
+import { IPlayerMatch } from "../types/gamemodes";
 import { Map } from "../types/map.type";
 import { didTeamWin } from "./didTeamWin";
 
@@ -16,13 +17,13 @@ type mapDataCalculatorFunction =
   | "winrate";
 
 export const mapDataCalculator = (
-  currentMap: Map[],
+  mapMatches: IPlayerMatch[],
   request: mapDataCalculatorFunction
 ): string => {
   const getKills = (): string => {
     let killsCount = 0;
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
       killsCount += element.stats.kills;
     }
     return killsCount.toString();
@@ -30,8 +31,8 @@ export const mapDataCalculator = (
 
   const getDeaths = (): string => {
     let deathCount = 0;
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
       deathCount += element.stats.deaths;
     }
     return deathCount.toString();
@@ -39,8 +40,8 @@ export const mapDataCalculator = (
 
   const getAssists = (): string => {
     let assistCount = 0;
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
       assistCount += element.stats.assists;
     }
     return assistCount.toString();
@@ -48,8 +49,8 @@ export const mapDataCalculator = (
 
   const getTotalScore = (): string => {
     let totalScoreCount = 0;
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
       totalScoreCount += element.stats.score;
     }
     return totalScoreCount.toString();
@@ -58,8 +59,8 @@ export const mapDataCalculator = (
   const getKdaRatio = (): string => {
     let allKills = 0;
     let allDeaths = 0;
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
       allKills += element.stats.kills;
       allDeaths += element.stats.deaths;
     }
@@ -72,8 +73,8 @@ export const mapDataCalculator = (
     let SpikeRushCount = 0;
     let DeathmatchCount = 0;
 
-    for (let index = 0; index < currentMap.length; index++) {
-      const element = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element = mapMatches[index];
 
       switch (element.meta.mode) {
         case "Competitive":
@@ -113,7 +114,7 @@ export const mapDataCalculator = (
   const getFavoriteAgent = (): string => {
     const agentCount: AgentCount = {};
 
-    for (const match of currentMap) {
+    for (const match of mapMatches) {
       const agentName = match.stats.character.name;
       agentCount[agentName] = agentCount[agentName]
         ? agentCount[agentName] + 1
@@ -137,8 +138,8 @@ export const mapDataCalculator = (
     let winCount = 0;
     let lossCount = 0;
 
-    for (let index = 0; index < currentMap.length; index++) {
-      const element: Map = currentMap[index];
+    for (let index = 0; index < mapMatches.length; index++) {
+      const element: Map = mapMatches[index];
       const didWin: boolean = didTeamWin(element.stats.team, element.teams);
       if (didWin) {
         winCount++;
