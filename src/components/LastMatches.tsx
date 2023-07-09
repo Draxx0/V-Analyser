@@ -103,7 +103,7 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
                   </div>
                 </div>
 
-                {isRankedMatch(match) && match.rank && (
+                {isRankedMatch(match) && (
                   <img
                     src={rankIconFunction(match.rank)}
                     alt="icon rank"
