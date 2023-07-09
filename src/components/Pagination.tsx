@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { INews } from "../types/news.type";
 
 interface Props {
@@ -69,7 +69,7 @@ const Pagination: React.FC<Props> = ({
               onClick={() => onPageChange(currentPage - 1)}
               className="text-lg hover:text-red transition-all"
             >
-              Précédent
+              Previous
             </button>
           )}
 
@@ -98,7 +98,7 @@ const Pagination: React.FC<Props> = ({
               onClick={() => onPageChange(currentPage + 1)}
               className="text-lg hover:text-red transition-all"
             >
-              Suivant
+              Next
             </button>
           )}
         </div>
