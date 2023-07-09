@@ -1,23 +1,22 @@
 import MapDetails from "../../components/MapDetails";
 import MapItem from "../../components/MapItem";
-import PlayerWidget from "../../components/PlayerWidget";
+import PlayerWidget from "../../components/common/PlayerWidget";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import localMapsJson from "../../data/maps.json";
 import ApiService from "../../services/api.service";
-import { ILocalMap, IMap, IMapResponse } from "../../types/map.type";
+import { ILocalMap, Map } from "../../types/map.type";
 import { useEffect, useState, useContext } from "react";
-import Loading from "../../components/Loading";
+
 const MapDashboard = () => {
   const { player } = useContext(PlayerContext);
   const [localMaps, setLocalMaps] = useState<ILocalMap[]>([]);
-  const [mapData, setMapData] = useState<IMap[]>([]);
-  const [currentMap, setCurrentMap] = useState<IMap[]>([]);
-  const [isData, setIsData] = useState<boolean>(false);
+  const [mapData, setMapData] = useState<Map[]>([]);
+  const [mapMatches, setMapMatches] = useState<Map[]>([]);
 
   const getMapData = async (mapName: string): Promise<void> => {
     if (player) {
       try {
-        const response: IMap[] = await ApiService.getMap(
+        const response: Map[] = await ApiService.getMap(
           player.region,
           player.name,
           player.tag,
@@ -37,11 +36,9 @@ const MapDashboard = () => {
 
   useEffect(() => {
     if (mapData.length > 0) {
-      setCurrentMap(mapData);
-      setIsData(true)
+      setMapMatches(mapData);
     } else {
-      setCurrentMap([]);
-      setIsData(false)
+      setMapMatches([]);
     }
   }, [mapData]);
 
@@ -66,11 +63,13 @@ const MapDashboard = () => {
           </div>
         </div>
 
-        <div className={`col-start-2 col-end-7 row-start-1 gradient ${isData ? "h-full" : "h-fit"} w-full relative min-h-[400px]`}>
-          <MapDetails currentMap={currentMap} />
+        <div
+          className={`col-start-2 col-end-7 row-start-1 gradient w-full h-fit relative`}
+        >
+          <MapDetails mapMatches={mapMatches} />
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 

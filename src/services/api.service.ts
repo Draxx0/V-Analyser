@@ -1,14 +1,15 @@
 import axios from "axios";
 import { IPlayerResponse } from "../types/player.type";
-import { IPlayerMatchResponse } from "../types/player-competitive.type";
+import { Gamemode, IPlayerMatch } from "../types/gamemodes";
 import { IMapResponse } from "../types/map.type";
-import { PlayerMmrData } from "../types/playerMmr.type";
-import { IMap } from "../types/map.type";
-import { News } from "../types/news.type";
+import { PlayerMmrData } from "../types/player.type";
+import { Map } from "../types/map.type";
+import { INewsResponse } from "../types/news.type";
+import { sliceMatchsReponse } from "../functions/sliceMatchsReponse";
+import { IMatch } from "../types/match.type";
+import { modelingMmrData } from "../functions/modelingMmrData";
 
-interface ApiServiceMethods {
-  [key: string]: (...args: any[]) => Promise<any>;
-}
+// ACCOUNT
 
 const getAccount = async (
   name: string,
@@ -20,73 +21,25 @@ const getAccount = async (
   return response.data;
 };
 
-const getNews = async (): Promise<News[]> => {
+// NEWS
+
+const getNews = async (): Promise<INewsResponse[]> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/website/en-us`
   );
   return response.data;
 };
 
-const getCompetitive = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<IPlayerMatchResponse> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=competitive`
-  );
-  const slicedData =
-    response.data.data.length >= 6 && response.data.data.slice(0, 6);
-  response.data.data = slicedData;
-  return response.data;
-};
+// MATCH(S)
 
-const getCompetitiveMatch = async (matchId: string) => {
+const getCompetitiveMatch = async (matchId: string): Promise<IMatch> => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL_V2}/match/${matchId}`
   );
   return response.data;
 };
 
-const getUnrated = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<IPlayerMatchResponse> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=unrated`
-  );
-
-  const slicedData =
-    response.data.data.length >= 6
-      ? response.data.data.slice(0, 6)
-      : response.data.data;
-  response.data.data = slicedData;
-  return response.data;
-};
-
-const getSwiftplay = async (
-  region: string,
-  name: string,
-  tag: string
-): Promise<any> => {
-  const response = await axios.get(
-    `${
-      import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=swiftplay`
-  );
-
-  const slicedData =
-    response.data.data.length >= 6
-      ? response.data.data.slice(0, 6)
-      : response.data.data;
-  response.data.data = slicedData;
-  return response.data;
-};
+// MAP(S)
 
 const getMap = async (
   region: string,
@@ -101,7 +54,7 @@ const getMap = async (
   );
 
   const data = response.data.data.filter(
-    (map: IMap) =>
+    (map: Map) =>
       map.meta.mode !== "Custom Game" &&
       map.meta.mode !== "Spike Rush" &&
       map.meta.mode !== "Deathmatch" &&
@@ -111,7 +64,6 @@ const getMap = async (
       map.meta.mode !== "Swiftplay"
   );
 
-  console.log(data);
   return data;
 };
 
@@ -119,40 +71,35 @@ const getPlayerMmr = async (region: string, name: string, tag: string) => {
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API_URL_V2}/mmr/${region}/${name}/${tag}}`
   );
-
   const { data } = response.data;
-
-  const MmrData: PlayerMmrData = {
-    name: data.name,
-    tag: data.tag,
-    puuid: data.puuid,
-    current_data: {
-      currenttier: data.current_data.currenttier,
-      currenttierpatched: data.current_data.currenttierpatched,
-      images: data.current_data.images,
-      ranking_in_tier: data.current_data.ranking_in_tier,
-      mmr_change_to_last_game: data.current_data.mmr_change_to_last_game,
-      elo: data.current_data.elo,
-      games_needed_for_rating: data.current_data.games_needed_for_rating,
-      old: data.current_data.old,
-    },
-    highest_rank: {
-      old: data.highest_rank.old,
-      tier: data.highest_rank.tier,
-      patched_tier: data.highest_rank.patched_tier,
-      season: data.highest_rank.season,
-    },
-  };
+  const MmrData = modelingMmrData(data);
   return MmrData;
 };
 
-const ApiService: ApiServiceMethods = {
+// GAMEMODES
+
+const getGameMode = async (
+  region: string,
+  name: string,
+  tag: string,
+  gamemode: Gamemode
+): Promise<IPlayerMatch[]> => {
+  const response = await axios.get(
+    `${
+      import.meta.env.VITE_APP_API_URL
+    }/lifetime/matches/${region}/${name}/${tag}?mode=${gamemode}&page=1&size=6`
+  );
+
+  const slicedData = sliceMatchsReponse(response.data.data);
+
+  return slicedData;
+};
+
+const ApiService = {
   getAccount,
   getNews,
-  getCompetitive,
+  getGameMode,
   getCompetitiveMatch,
-  getUnrated,
-  getSwiftplay,
   getPlayerMmr,
   getMap,
 };

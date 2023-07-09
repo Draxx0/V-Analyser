@@ -1,19 +1,15 @@
-export interface IPlayerMatchResponse {
-  status: number;
+import { IResponseResult, Status } from "./common/generic";
+
+export type Gamemode = "competitive" | "unrated" | "swiftplay";
+
+export interface IPlayerMatchResponse extends Status {
   name: string;
   tag: string;
-  results: IPlayerMatchResult;
-  data: IPlayerMatchData[];
+  results: IResponseResult;
+  data: IPlayerMatch[];
 }
 
-type IPlayerMatchResult = {
-  total: number;
-  returned: number;
-  before: number;
-  after: number;
-};
-
-export type IPlayerMatchData = {
+export interface IPlayerMatch {
   meta: {
     id: string;
     map: {
@@ -57,17 +53,8 @@ export type IPlayerMatchData = {
     red: number;
     blue: number;
   };
-  matchData: IPlayerMatchData;
-  rank?: string;
-};
+}
 
-export type IPlayerMatchDataWithRank = IPlayerMatchData & {
+export interface IPlayerMatchDataWithRank extends IPlayerMatch {
   rank: string;
-};
-
-export type IPlayerMatchDataWithRankAndTeamScore = IPlayerMatchDataWithRank & {
-  teamScores: {
-    red: number;
-    blue: number;
-  };
-};
+}

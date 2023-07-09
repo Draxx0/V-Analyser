@@ -1,11 +1,9 @@
-import { PlayerContext } from "../contexts/PlayerContext";
-import { useContext } from "react";
 import { rankIconFunction } from "../functions/rankIconFunction";
 import { rankIconByCurrentTier } from "../functions/rankIconByCurrentTier";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
+import { PlayerMmrData } from "../types/player.type";
 
-const Rating = () => {
-  const { playerMmr } = useContext(PlayerContext);
+const Rating = ({ playerMmr }: { playerMmr: PlayerMmrData }) => {
   return (
     <>
       {playerMmr ? (
@@ -34,11 +32,10 @@ const Rating = () => {
               {playerMmr.current_data.currenttier < 25 && "/ 100"}
             </h4>
             <h4
-              className={`text-l tracking-wide uppercase font-bold ${
-                playerMmr.current_data.mmr_change_to_last_game > 0
-                  ? "text-green"
-                  : "text-red"
-              }`}
+              className={`text-l tracking-wide uppercase font-bold ${playerMmr.current_data.mmr_change_to_last_game > 0
+                ? "text-green"
+                : "text-red"
+                }`}
             >
               {playerMmr.current_data.mmr_change_to_last_game > 0
                 ? "+ " + playerMmr.current_data.mmr_change_to_last_game
@@ -47,7 +44,7 @@ const Rating = () => {
             </h4>
 
             {playerMmr.current_data.currenttierpatched !== "Unranked" &&
-            playerMmr.current_data.currenttierpatched !== "Radiant" ? (
+              playerMmr.current_data.currenttierpatched !== "Radiant" ? (
               <div className="flex flex-col gap-2 items-center">
                 <h4 className="text-l tracking-wide uppercase font-bold">
                   Next Rank

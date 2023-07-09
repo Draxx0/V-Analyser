@@ -1,11 +1,11 @@
-import React from "react";
-import { NewsData } from "../types/news.type";
+import React, { useMemo } from "react";
+import { INews } from "../types/news.type";
 
 interface Props {
   totalArticles: number;
   articlesPerPage: number;
   currentPage: number;
-  articles: NewsData[];
+  articles: INews[];
   onPageChange: (pageNumber: number) => void;
 }
 
@@ -69,7 +69,7 @@ const Pagination: React.FC<Props> = ({
               onClick={() => onPageChange(currentPage - 1)}
               className="text-lg hover:text-red transition-all"
             >
-              Précédent
+              Previous
             </button>
           )}
 
@@ -98,7 +98,7 @@ const Pagination: React.FC<Props> = ({
               onClick={() => onPageChange(currentPage + 1)}
               className="text-lg hover:text-red transition-all"
             >
-              Suivant
+              Next
             </button>
           )}
         </div>

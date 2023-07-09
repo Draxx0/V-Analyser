@@ -1,12 +1,12 @@
 import React from "react";
-import { NewsData } from "../types/news.type";
+import { INews } from "../types/news.type";
 import { formatDate } from "../functions/formatDate";
 import { sliceText } from "../functions/sliceText";
 import { BsPlayFill } from "react-icons/bs";
-import Loading from "./Loading";
+import Loading from "./common/Loading";
 
 interface Props {
-  articles: NewsData[];
+  articles: INews[];
 }
 
 const NewsList: React.FC<Props> = ({ articles }) => {
@@ -49,7 +49,7 @@ const NewsList: React.FC<Props> = ({ articles }) => {
           </div>
         ))
       ) : (
-        <Loading />
+        <Loading isAbsolute />
       )}
     </>
   );

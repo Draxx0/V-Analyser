@@ -1,11 +1,6 @@
-import { FC, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-type IProps = {
-  children: ReactNode;
-};
-
-const ProtectedRoute: FC<IProps> = ({ children }) => {
+const ProtectedRoute = ({ children }: { children: React.ReactElement }) => {
   if (!localStorage.getItem("player")) return <Navigate to="/" />;
 
   return <>{children}</>;

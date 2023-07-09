@@ -4,6 +4,7 @@ import { separateUsernameAndTag } from "../functions/separateUsernameAndTag";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useNavigate } from "react-router-dom";
 import { IPlayerResponse } from "../types/player.type";
+import Floater from "../components/common/Floater";
 
 const Auth = () => {
   const { setPlayer } = useContext(PlayerContext);
@@ -15,9 +16,11 @@ const Auth = () => {
   const handleConnectData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const trimmedUsername: string = formUsername.trim();
-      const { username, tag } = separateUsernameAndTag(trimmedUsername);
-      const account: IPlayerResponse = await ApiService.getAccount(username, tag);
+      const { username, tag } = separateUsernameAndTag(formUsername.trim());
+      const account: IPlayerResponse = await ApiService.getAccount(
+        username,
+        tag
+      );
       localStorage.setItem("player", JSON.stringify(account.data));
       setPlayer(account.data);
       navigate("/dashboard/competitive");
@@ -38,7 +41,7 @@ const Auth = () => {
   return (
     <section className="flex h-screen auth 2sm:flex-col">
       <div className="w-1/2 h-full bg-[url('/assets/images/valo-background.jpg')] bg-cover bg-center lg:w-1/3 2sm:w-full 2sm:h-1/3"></div>
-      <div className="w-1/2 flex flex-col p-10 justify-center relative lg:w-2/3 2sm:w-full 2sm:h-2/3 2sm:justify-start">
+      <div className="w-1/2 flex flex-col p-10 justify-center relative overflow-hidden lg:w-2/3 2sm:w-full 2sm:h-2/3 2sm:justify-start">
         <h1 className="text-5xl font-bold mb-5 text-red uppercase lg:text-4xl md:text-3xl">
           V-Analyser
         </h1>
@@ -85,6 +88,11 @@ const Auth = () => {
           </span>
           .
         </small>
+
+        <Floater classes="-top-20 right-0 rotate-45 w-72" />
+        <Floater classes="bottom-10 left-0 rotate-12 w-80 " />
+        <Floater classes="-top-20 left-0 -rotate-45 w-56" />
+        <Floater classes="bottom-0 right-0 -rotate-45 w-64" />
       </div>
     </section>
   );
