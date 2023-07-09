@@ -87,7 +87,7 @@ const getGameMode = async (
   const response = await axios.get(
     `${
       import.meta.env.VITE_APP_API_URL
-    }/lifetime/matches/${region}/${name}/${tag}?mode=${gamemode}`
+    }/lifetime/matches/${region}/${name}/${tag}?mode=${gamemode}&page=1&size=6`
   );
 
   const slicedData = sliceMatchsReponse(response.data.data);

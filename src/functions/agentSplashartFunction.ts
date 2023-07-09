@@ -63,6 +63,9 @@ export const agentSplashartFunction = (agent: string) => {
     case "Neon":
       return "/assets/images/agents/neon-art.png";
 
+    case "Deadlock":
+      return "/assets/images/agents/deadlock-art.png";
+
     default:
       return "notfound";
   }

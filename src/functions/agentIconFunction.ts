@@ -63,7 +63,10 @@ export const agentIconFunction = (agent: string) => {
     case "Neon":
       return "/assets/images/agents/neon.webp";
 
+    case "Deadlock":
+      return "/assets/images/agents/deadlock.webp";
+
     default:
-      return "notfound";
+      return "/assets/images/ranks/unraked.png";
   }
 };
