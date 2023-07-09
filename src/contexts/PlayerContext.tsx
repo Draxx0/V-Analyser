@@ -19,14 +19,14 @@ type PlayerType = {
   player: PlayerData | null;
   setPlayer: Dispatch<SetStateAction<PlayerData | null>>;
   Signout: () => void;
-  getCompetitiveMatchData: (matchId: string) => void;
+  // getCompetitiveMatchData: (matchId: string) => void;
 };
 
 const PlayerContext = createContext<PlayerType>({
   player: null,
   setPlayer: () => { },
   Signout: () => { },
-  getCompetitiveMatchData: () => { },
+  // getCompetitiveMatchData: () => { },
 });
 
 const PlayerContextProvider: FC<IProps> = ({ children }) => {
@@ -39,23 +39,23 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
     window.location.href = "/";
   };
 
-  const getCompetitiveMatchData = async (matchId: string): Promise<string> => {
-    try {
-      const response: IMatch = await ApiService.getCompetitiveMatch(matchId);
+  // const getCompetitiveMatchData = async (matchId: string): Promise<string> => {
+  //   try {
+  //     const response: IMatch = await ApiService.getCompetitiveMatch(matchId);
 
-      const playerMatch = response.data.players.all_players.find(
-        (playerInMatch: PlayerInMatch) => playerInMatch.name === player?.name
-      );
+  //     const playerMatch = response.data.players.all_players.find(
+  //       (playerInMatch: PlayerInMatch) => playerInMatch.name === player?.name
+  //     );
 
-      if (!playerMatch) throw new Error("Player not found in match");
+  //     if (!playerMatch) throw new Error("Player not found in match");
 
-      const currentRankAtMatch = playerMatch?.currenttier_patched;
-      return currentRankAtMatch;
-    } catch (error) {
-      console.log(error);
-      return "";
-    }
-  };
+  //     const currentRankAtMatch = playerMatch?.currenttier_patched;
+  //     return currentRankAtMatch;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return "";
+  //   }
+  // };
 
   useEffect(() => {
     if (localStorage.getItem("player")) {
@@ -71,7 +71,7 @@ const PlayerContextProvider: FC<IProps> = ({ children }) => {
       value={{
         player,
         setPlayer,
-        getCompetitiveMatchData,
+        // getCompetitiveMatchData,
         Signout,
       }}
     >

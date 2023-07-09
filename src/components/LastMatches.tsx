@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { useState, useEffect } from "react";
 import { agentIconFunction } from "../functions/agentIconFunction";
 import { rankIconFunction } from "../functions/rankIconFunction";
 import { didTeamWin } from "../functions/didTeamWin";
@@ -16,8 +15,8 @@ import useGetCompetitive from "../hooks/UseGetCompetitive";
 const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.SetStateAction<IPlayerMatch | IPlayerMatchDataWithRank | null>> }) => {
   const [matchResults, setMatchResults] = useState<IPlayerMatchDataWithRank[] | IPlayerMatch[] | null>([]);
   const location = useLocation();
-  const { getSwiftplay } = useGetSwiftplay();
-  const { getUnrateds } = useGetUnrateds();
+  const { data: swiftplays } = useGetSwiftplay();
+  const { data: unrateds } = useGetUnrateds();
   const { getCompetitive } = useGetCompetitive();
 
   const isRankedMatch = (match: IPlayerMatchDataWithRank | IPlayerMatch): match is IPlayerMatchDataWithRank => {
@@ -33,15 +32,17 @@ const LastMatches = ({ setLastMatch, }: { setLastMatch: React.Dispatch<React.Set
         break;
 
       case "/dashboard/unrated":
-        const unrateds = await getUnrateds();
-        setMatchResults(unrateds);
-        setLastMatch(unrateds && unrateds[0])
+        if (unrateds) {
+          setMatchResults(unrateds);
+          setLastMatch(unrateds && unrateds[0])
+        }
         break;
 
       case "/dashboard/swiftplay":
-        const swiftplays = await getSwiftplay();
-        setMatchResults(swiftplays);
-        setLastMatch(swiftplays && swiftplays[0])
+        if (swiftplays) {
+          setMatchResults(swiftplays);
+          setLastMatch(swiftplays && swiftplays[0])
+        }
         break;
     }
   };

@@ -1,33 +1,20 @@
 import ApiService from "../services/api.service"
-import { useEffect, useState, useContext } from "react"
+import { useContext } from "react"
 import { PlayerContext } from "../contexts/PlayerContext"
-import { PlayerMmrData } from "../types/player.type"
+import { useQuery } from "react-query"
 
-const UseGetMmr = () => {
- const [playerMmr, setPlayerMmr] = useState<PlayerMmrData | null>(null)
+const useGetMmrData = () => {
  const { player } = useContext(PlayerContext)
 
- const getMmrData = async (): Promise<void> => {
+ const query = useQuery(["mmr"], async () => {
   if (player) {
-   try {
-    const response: PlayerMmrData = await ApiService.getPlayerMmr(
-     player.region,
-     player.name,
-     player.tag
-    );
-    setPlayerMmr(response);
-   } catch (error) {
-    console.log(error);
-   }
+   return await ApiService.getPlayerMmr(player.region, player.name, player.tag)
   }
- };
+ })
 
- useEffect(() => {
-  getMmrData()
- }, [player])
-
-
- return { playerMmr, setPlayerMmr, getMmrData }
+ return {
+  ...query
+ }
 }
 
-export default UseGetMmr
+export default useGetMmrData

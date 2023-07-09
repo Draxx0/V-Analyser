@@ -1,5 +1,5 @@
 import ApiService from "../services/api.service"
-import { useEffect, useState, useContext } from "react"
+import { useState, useContext } from "react"
 import { PlayerContext } from "../contexts/PlayerContext"
 import { IPlayerMatch, IPlayerMatchDataWithRank } from "../types/gamemodes"
 import { IMatch, PlayerInMatch } from "../types/match.type"
@@ -48,10 +48,6 @@ const useGetCompetitive = () => {
 
   return null
  }
-
- useEffect(() => {
-  getCompetitive()
- }, [player])
 
 
  return { competitives, setCompetitives, getCompetitive }

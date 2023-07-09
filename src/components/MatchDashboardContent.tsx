@@ -6,12 +6,12 @@ import Loading from "./common/Loading";
 import { useLocation } from "react-router-dom";
 import HighestRating from "./HighestRating";
 import { IPlayerMatch, IPlayerMatchDataWithRank } from "../types/gamemodes";
-import UseGetMmr from "../hooks/UseGetMmrData";
+import useGetMmrData from "../hooks/UseGetMmrData";
 
 const MatchDashboardContent = () => {
   const [lastMatch, setLastMatch] = useState<IPlayerMatch | IPlayerMatchDataWithRank | null>(null);
   const location = useLocation();
-  const { playerMmr } = UseGetMmr();
+  const { data: playerMmr } = useGetMmrData();
 
   return (
     <div className="grid grid-cols-6 mt-[50px] pb-[100px] gap-5">
